@@ -15,8 +15,10 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.theme.Theme;
 import com.gank.jack.ganknew.theme.util.ColorUiUtil;
+import com.gank.jack.ganknew.view.activity.MainActivity;
 
 public class PreUtils {
 
@@ -92,11 +94,11 @@ public class PreUtils {
     }
 
     public static Theme getCurrentTheme(Context context) {
-        return Theme.valueOf(PreUtils.getString(context, "app_theme", Theme.Brown.name()));
+        return Theme.valueOf(PreUtils.getString(context,"app_theme", Theme.Brown.name()));
     }
 
     public static void setCurrentTheme(Context context, Theme currentTheme) {
-        PreUtils.putString(context, "app_theme", currentTheme.name());
+        PreUtils.putString(context,"app_theme", currentTheme.name());
     }
 
     public static void changeColorImpl(Activity context, final Resources.Theme theme){
@@ -131,6 +133,11 @@ public class PreUtils {
         } else {
             ColorUiUtil.changeTheme(rootView,theme);
         }
+    }
+
+    public static void changeTheme(Activity activity,int style,String color){
+        activity.setTheme(style);
+        PreUtils.setCurrentTheme(activity,Theme.getTheme(color));
     }
 
 }

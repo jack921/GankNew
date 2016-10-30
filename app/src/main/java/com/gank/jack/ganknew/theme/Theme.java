@@ -19,6 +19,10 @@ public enum Theme {
     LightGreen,
     Lime,
     DeepOrange,
-    BlueGrey
+    BlueGrey;
+
+    public static Theme getTheme(String theme){
+        return valueOf(theme);
+    }
 }
 

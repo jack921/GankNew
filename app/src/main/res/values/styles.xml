@@ -14,7 +14,6 @@
         <item name="md_title_color">@color/colorBluePrimary</item>
         <item name="md_link_color">@color/colorBluePrimary</item>
         <item name="md_positive_color">@color/colorBluePrimary</item>
-
     </style>
 
     <!--redTheme-->
@@ -26,7 +25,6 @@
         <item name="md_title_color">@color/colorRedPrimary</item>
         <item name="md_link_color">@color/colorRedPrimary</item>
         <item name="md_positive_color">@color/colorRedPrimary</item>
-
     </style>
     <!--brownTheme-->
     <style name="BrownTheme" parent="AppTheme">
