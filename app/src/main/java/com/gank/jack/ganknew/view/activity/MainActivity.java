@@ -18,13 +18,11 @@ import com.gank.jack.ganknew.view.fragment.TodayRecommFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-    public ImageView nav_header_img;
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Bind(R.id.nav_view)
     public NavigationView navigationView;
 
+    public ImageView nav_header_img;
     private AllClassifyFragment allClassifyFragment;
     private FemaleWelfareFragment femaleWelfareFragment;
     private MyCollectFragment myCollectFragment;
@@ -45,7 +43,6 @@ public class MainActivity extends BaseActivity
         fragmentManager=getSupportFragmentManager();
         nav_header_img=(ImageView)navigationView.getHeaderView(0).findViewById(R.id.nav_header_img);
         Glide.with(this).load(R.drawable.nav_header_img).asGif().into(nav_header_img);
-
         setTabFragment(0);
     }
 

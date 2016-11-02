@@ -7,13 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.gank.jack.ganknew.R;
+import com.gank.jack.ganknew.base.BaseFragment;
+
 import butterknife.ButterKnife;
 
 /**
  * Created by Jack on 2016/10/31.
  */
 
-public class AllClassifyFragment extends Fragment{
+public class AllClassifyFragment extends BaseFragment{
 
     @Nullable
     @Override
