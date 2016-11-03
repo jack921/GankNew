@@ -26,7 +26,7 @@ import butterknife.OnClick;
  * Created by Jack on 2016/10/31.
  */
 
-public class TodayRecommFragment extends BaseFragment implements AppBarLayout.OnOffsetChangedListener {
+public class TodayRecommFragment extends BaseFragment implements AppBarLayout.OnOffsetChangedListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.fab)
     public FloatingActionButton fab;
@@ -57,7 +57,7 @@ public class TodayRecommFragment extends BaseFragment implements AppBarLayout.On
         baseActivity.setSupportActionBar(toolbar);
         appBar.addOnOffsetChangedListener(this);
         todayRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        todaySwipeRefreshLayout.setOnRefreshListener(this);
     }
 
     @OnClick(R.id.fab)
@@ -75,6 +75,12 @@ public class TodayRecommFragment extends BaseFragment implements AppBarLayout.On
         } else {
             todaySwipeRefreshLayout.setEnabled(false);
         }
+    }
+
+    @Override
+    public void onRefresh() {
+
+
     }
 
 }
