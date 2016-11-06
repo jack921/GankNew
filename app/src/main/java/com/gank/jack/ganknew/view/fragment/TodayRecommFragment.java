@@ -1,5 +1,6 @@
 package com.gank.jack.ganknew.view.fragment;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,11 +14,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.base.BaseFragment;
+import com.gank.jack.ganknew.bean.Gank;
+import com.gank.jack.ganknew.bean.TodayGank;
+import com.gank.jack.ganknew.interfaces.TodayRecommInterface;
+import com.gank.jack.ganknew.presenter.TodayRecommPresenter;
 import com.gank.jack.ganknew.theme.Theme;
+import com.gank.jack.ganknew.utils.ImageLoad;
 import com.gank.jack.ganknew.utils.PreUtils;
+import com.gank.jack.ganknew.utils.SPUtils;
+import com.google.gson.Gson;
+
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -26,7 +39,10 @@ import butterknife.OnClick;
  * Created by Jack on 2016/10/31.
  */
 
-public class TodayRecommFragment extends BaseFragment implements AppBarLayout.OnOffsetChangedListener, SwipeRefreshLayout.OnRefreshListener {
+public class TodayRecommFragment extends BaseFragment implements
+        AppBarLayout.OnOffsetChangedListener,
+        SwipeRefreshLayout.OnRefreshListener,
+        TodayRecommInterface{
 
     @Bind(R.id.fab)
     public FloatingActionButton fab;
@@ -40,8 +56,11 @@ public class TodayRecommFragment extends BaseFragment implements AppBarLayout.On
     public SwipeRefreshLayout todaySwipeRefreshLayout;
     @Bind(R.id.today_recyclerview)
     public RecyclerView todayRecyclerview;
+    @Bind(R.id.todayGankImage)
+    public ImageView todayGankImage;
 
-    public BaseActivity baseActivity;
+    public TodayRecommPresenter todayRecommPresenter;
+    public  List<Gank> listGank=null;
 
     @Nullable
     @Override
@@ -53,11 +72,12 @@ public class TodayRecommFragment extends BaseFragment implements AppBarLayout.On
     }
 
     public void initView(){
-        baseActivity=(BaseActivity)getActivity();
-        baseActivity.setSupportActionBar(toolbar);
+        ((BaseActivity)getActivity()).setSupportActionBar(toolbar);
         appBar.addOnOffsetChangedListener(this);
         todayRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         todaySwipeRefreshLayout.setOnRefreshListener(this);
+        todayRecommPresenter=new TodayRecommPresenter(getActivity());
+        todayRecommPresenter.getTodayRecommData(this,"2016","11","04");
     }
 
     @OnClick(R.id.fab)
@@ -70,7 +90,7 @@ public class TodayRecommFragment extends BaseFragment implements AppBarLayout.On
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        if (verticalOffset >= 0) {
+        if (verticalOffset>= 0) {
             todaySwipeRefreshLayout.setEnabled(true);
         } else {
             todaySwipeRefreshLayout.setEnabled(false);
@@ -80,7 +100,25 @@ public class TodayRecommFragment extends BaseFragment implements AppBarLayout.On
     @Override
     public void onRefresh() {
 
+    }
 
+    @Override
+    public void getToadyRecomm(List<Gank> listGank){
+        if(listGank==null){
+            return ;
+        }
+        this.listGank=listGank;
+
+
+        if(listGank.get(listGank.size()-1).type.equals("福利")){
+            ImageLoad.displayImage(listGank.get(listGank.size()-1).url,todayGankImage);
+        }
+    }
+
+    //网络出错等情况时
+    @Override
+    public void onError(Throwable throwable) {
+        showToast(getActivity().getString(R.string.net_error));
     }
 
 }

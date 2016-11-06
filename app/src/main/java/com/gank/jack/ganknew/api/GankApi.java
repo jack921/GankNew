@@ -2,6 +2,7 @@ package com.gank.jack.ganknew.api;
 
 
 import com.gank.jack.ganknew.bean.GankModel;
+import com.gank.jack.ganknew.bean.TodayGank;
 
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -18,8 +19,8 @@ public interface GankApi {
 
     //获取特定日期网站数据
     @GET("history/content/day/{year}/{month}/{day}")
-    Observable<GankModel> getHistoryData(@Path("year") String year,
-                                         @Path("month") String month,@Path("day") String day);
+    Observable<GankModel> getHistoryData(@Path("year") String year,@Path("month")
+                String month,@Path("day") String day);
 
     //分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
     //数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
@@ -31,8 +32,8 @@ public interface GankApi {
 
     //每日数据： http://gank.io/api/day/年/月/日
     @GET("day/{year}/{month}/{day}")
-    Observable<GankModel> getGankDataOfDate(@Path("year") String year,
-            @Path("month") String month,@Path("day") String day);
+    Observable<TodayGank> getGankDataOfDate(@Path("year") String year,
+                 @Path("month") String month, @Path("day") String day);
 
 
     //搜索 API搜索 API

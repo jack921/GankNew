@@ -3,6 +3,7 @@
     package="com.gank.jack.ganknew" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".base.MyApplication"

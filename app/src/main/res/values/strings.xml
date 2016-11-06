@@ -13,6 +13,8 @@
     <string name="female_welfare">妹子福利</string>
     <string name="my_collect">我的收藏</string>
 
+    <string name="net_error">网络出错了,怪我咯</string>
+
 
 
 </resources>

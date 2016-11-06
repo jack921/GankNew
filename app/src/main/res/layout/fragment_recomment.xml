@@ -14,7 +14,7 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
             android:fitsSystemWindows="true">
 
                 <android.support.design.widget.CollapsingToolbarLayout
@@ -27,12 +27,11 @@
                     app:expandedTitleMarginEnd="64dp">
 
                         <ImageView
-                            android:id="@+id/back_drop"
+                            android:id="@+id/todayGankImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            android:fitsSystemWindows="true"
-                            android:src="@mipmap/ic_launcher" />
+                            android:fitsSystemWindows="true"/>
 
                         <android.support.v7.widget.Toolbar
                             android:id="@+id/tool_bar"
