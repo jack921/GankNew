@@ -1,10 +1,12 @@
 package com.gank.jack.ganknew.bean;
 
+import java.util.List;
+
 /**
  * Created by Jack on 2016/11/4.
  */
 
-public class Gank {
+public class Gank implements Cloneable{
     public String _id;
     public String createdAt;
     public String desc;
@@ -14,8 +16,10 @@ public class Gank {
     public String url;
     public boolean used;
     public String who;
+    public List<String> images;
 
     public boolean isHeader;
+    public boolean hasLoadImage=false;
 
     public boolean isMeizi(){
         return type.equals("福利");
@@ -31,4 +35,5 @@ public class Gank {
         }
         return gank;
     }
+
 }

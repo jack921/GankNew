@@ -2,6 +2,7 @@ package com.gank.jack.ganknew.api;
 
 
 import com.gank.jack.ganknew.bean.GankModel;
+import com.gank.jack.ganknew.bean.ImageType;
 import com.gank.jack.ganknew.bean.TodayGank;
 
 import retrofit2.http.GET;
@@ -9,6 +10,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -46,6 +48,9 @@ public interface GankApi {
     @POST("add2gank")
     Observable<GankModel> commitToGank(@Part("url") String url,@Path("desc") String desc
             ,@Part("who") String who,@Part("type") String type,@Part("debug") String debug);
+
+    @GET
+    Observable<ImageType> GankImageInfo(@Url String url);
 
 
 }

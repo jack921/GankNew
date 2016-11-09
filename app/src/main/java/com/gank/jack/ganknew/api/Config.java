@@ -1,5 +1,8 @@
 package com.gank.jack.ganknew.api;
 
+import com.gank.jack.ganknew.R;
+import com.gank.jack.ganknew.base.MyApplication;
+
 /**
  * Created by Jack on 2016/11/3.
  */

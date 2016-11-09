@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/port_id"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_spot"/>
+
+        <TextView
+            android:id="@+id/main_item_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/port_id"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="14sp"
+            android:text="基于 UITableView 实现的更灵活的单页布局.(代码家)"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/main_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone"/>
+
+</LinearLayout>

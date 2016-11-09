@@ -29,7 +29,6 @@ public class GankApiRetrofit {
     //api的baseUrl
     public static final String GANK_BASE_URL= MyApplication.getContext().getString(R.string.base_api);
 
-
     public GankApi getGankApiObject(){
         return gankApi;
     }
@@ -49,6 +48,8 @@ public class GankApiRetrofit {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         gankApi=retrofit.create(GankApi.class);
+
+
     }
 
     Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {

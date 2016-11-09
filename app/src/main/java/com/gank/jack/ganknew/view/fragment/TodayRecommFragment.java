@@ -1,6 +1,5 @@
 package com.gank.jack.ganknew.view.fragment;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,22 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.gank.jack.ganknew.R;
+import com.gank.jack.ganknew.adapter.TodayRecommAdapter;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.base.BaseFragment;
 import com.gank.jack.ganknew.bean.Gank;
-import com.gank.jack.ganknew.bean.TodayGank;
 import com.gank.jack.ganknew.interfaces.TodayRecommInterface;
 import com.gank.jack.ganknew.presenter.TodayRecommPresenter;
 import com.gank.jack.ganknew.theme.Theme;
 import com.gank.jack.ganknew.utils.ImageLoad;
 import com.gank.jack.ganknew.utils.PreUtils;
-import com.gank.jack.ganknew.utils.SPUtils;
-import com.google.gson.Gson;
-
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -60,6 +54,7 @@ public class TodayRecommFragment extends BaseFragment implements
     public ImageView todayGankImage;
 
     public TodayRecommPresenter todayRecommPresenter;
+    public TodayRecommAdapter todayRecommAdapter;
     public  List<Gank> listGank=null;
 
     @Nullable
@@ -77,7 +72,7 @@ public class TodayRecommFragment extends BaseFragment implements
         todayRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         todaySwipeRefreshLayout.setOnRefreshListener(this);
         todayRecommPresenter=new TodayRecommPresenter(getActivity());
-        todayRecommPresenter.getTodayRecommData(this,"2016","11","04");
+        todayRecommPresenter.getTodayRecommData(this,"2016","11","07");
     }
 
     @OnClick(R.id.fab)
@@ -99,20 +94,21 @@ public class TodayRecommFragment extends BaseFragment implements
 
     @Override
     public void onRefresh() {
-
+        todayRecommPresenter.getTodayRecommData(this,"2016","11","09");
     }
 
     @Override
-    public void getToadyRecomm(List<Gank> listGank){
-        if(listGank==null){
-            return ;
-        }
-        this.listGank=listGank;
+    public void getToadyRecomm(List<Gank> listGanks){
+        if(listGanks==null) return ;
+        if(listGank!=null) listGank.clear();
 
-
+        this.listGank=listGanks;
         if(listGank.get(listGank.size()-1).type.equals("福利")){
             ImageLoad.displayImage(listGank.get(listGank.size()-1).url,todayGankImage);
         }
+        todayRecommAdapter=new TodayRecommAdapter(getActivity(),this.listGank);
+        todayRecyclerview.setAdapter(todayRecommAdapter);
+        todaySwipeRefreshLayout.setRefreshing(false);
     }
 
     //网络出错等情况时

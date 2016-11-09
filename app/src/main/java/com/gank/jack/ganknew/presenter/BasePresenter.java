@@ -1,6 +1,8 @@
 package com.gank.jack.ganknew.presenter;
 
 import android.content.Context;
+
+import com.gank.jack.ganknew.api.Config;
 import com.gank.jack.ganknew.api.GankApi;
 import com.gank.jack.ganknew.api.GankApiFactory;
 

@@ -3,6 +3,9 @@ package com.gank.jack.ganknew.utils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.base.MyApplication;
 
@@ -17,6 +20,7 @@ public class ImageLoad {
                 .load(imgUrl)
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
+                .crossFade()
                 .into(imageView);
     }
 
