@@ -16,13 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            android:paddingTop="25dp"
             app:layout_scrollFlags="scroll|enterAlways" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/classify_tablayout"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="?attr/colorPrimary">
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:layout_marginTop="23dp">
         </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>

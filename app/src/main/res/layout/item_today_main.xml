@@ -26,6 +26,7 @@
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="5dp"
             android:textSize="14sp"
+            android:lineSpacingExtra="3dp"
             android:text="基于 UITableView 实现的更灵活的单页布局.(代码家)"/>
 
     </RelativeLayout>

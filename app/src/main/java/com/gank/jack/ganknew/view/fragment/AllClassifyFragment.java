@@ -49,11 +49,16 @@ public class AllClassifyFragment extends BaseFragment{
 
     public void init(){
         tabTitle= Config.Aategory;
-        listFragment=new ArrayList<Fragment>();
+        listFragment=new ArrayList<>();
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         for(int i=0;i<tabTitle.length;i++){
             tabLayout.addTab(tabLayout.newTab().setText(tabTitle[i]));
-            listFragment.add(new ClassifyTabFragment());
+            Bundle bundle=new Bundle();
+            bundle.putString("TabTitle",tabTitle[i]);
+            ClassifyTabFragment classifyTabFragment=new ClassifyTabFragment();
+            classifyTabFragment.setArguments(bundle);
+            listFragment.add(classifyTabFragment);
         }
         ClassifyTabFragmentAdapter adapter = new ClassifyTabFragmentAdapter(
                 getActivity().getSupportFragmentManager(),listFragment,tabTitle);

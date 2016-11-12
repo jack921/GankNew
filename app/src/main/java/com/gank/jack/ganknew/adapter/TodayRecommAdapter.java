@@ -55,9 +55,9 @@ public class TodayRecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(getItemViewType(viewType)== HEADER){
-            return new HeaderView(LayoutInflater.from(context).inflate(R.layout.act_main_header,parent,false));
+            return new HeaderView(LayoutInflater.from(context).inflate(R.layout.item_today_header,parent,false));
         }else{
-            return new ItemView(LayoutInflater.from(context).inflate(R.layout.act_main_item,parent,false));
+            return new ItemView(LayoutInflater.from(context).inflate(R.layout.item_today_main,parent,false));
         }
     }
 
@@ -112,9 +112,7 @@ public class TodayRecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
               if(!gank.hasLoadImage){
                   GankApiFactory.GankApiImageInfo(gank.images.get(0) + "?imageInfo", new IImageInfo() {
                       @Override
-                      public void error() {
-                          itemImage.setVisibility(View.GONE);
-                      }
+                      public void error(){}
                       @Override
                       public void seccess(ImageType imageType) {
                           if (!imageType.format.equals("gif")) {
