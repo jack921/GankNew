@@ -1,5 +1,6 @@
 package com.gank.jack.ganknew.view.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -32,6 +33,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        transparentStatusBar();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();

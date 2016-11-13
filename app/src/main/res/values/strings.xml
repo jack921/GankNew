@@ -12,9 +12,8 @@
     <string name="type_browse">分类浏览</string>
     <string name="female_welfare">妹子福利</string>
     <string name="my_collect">我的收藏</string>
-
     <string name="net_error">网络出错了,怪我咯</string>
-
+    <string name="sort">排序</string>
 
 
 </resources>

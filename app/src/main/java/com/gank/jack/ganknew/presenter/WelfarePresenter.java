@@ -22,7 +22,7 @@ public class WelfarePresenter extends BasePresenter{
     }
 
     public void getMeizi(final WelfaceInterface welfaceInterface,int page){
-        gankApi.getGankData("福利","15",page+"")
+        gankApi.getGankData("福利","6",page+"")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GankModel>() {

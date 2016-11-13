@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?><!--必须使用CoordinatorLayout才会有向上隐藏效果-->
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_layout"
+        android:id="@+id/classify_barlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -16,15 +17,19 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:paddingTop="25dp"
+            android:layout_marginTop="25dp"
             app:layout_scrollFlags="scroll|enterAlways" />
+
+        <View
+            android:id="@+id/statusbar"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="?attr/colorPrimary"/>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/classify_tablayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:layout_marginTop="23dp">
+            android:layout_height="wrap_content">
         </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>

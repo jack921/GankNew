@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activity.TextActivity"></activity>
         <activity android:name=".view.activity.WebContentActivity"></activity>
 
 

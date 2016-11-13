@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.utils.ImageLoad;
-
+import com.gank.jack.ganknew.utils.ScreenUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,49 +19,55 @@ import java.util.List;
  * Created by Jack on 2016/11/12.
  */
 
-public class WelfareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
+public class WelfareAdapter extends BaseRecyclerViewAdapter<Gank>{
     private List<Gank> listGank;
     private List<Integer> listHeight;
     private Context context;
 
-    public WelfareAdapter(Context context,List<Gank> listGank){
-        listHeight=new ArrayList<>();
-        this.listGank=listGank;
+    public WelfareAdapter(Context context, List<Gank> ListData) {
+        super(context, ListData);
         this.context=context;
+        listHeight=new ArrayList<>();
+        this.listGank=ListData;
         for(int i=0;i<listGank.size();i++){
-            listHeight.add((int)(500+Math.random()*300));
+            listHeight.add((int)(600+Math.random()*150));
+        }
+    }
+
+    public void addListData(List<Gank> listGank){
+        for(int i=0;i<listGank.size();i++){
+            this.listGank.add(listGank.get(i));
+            listHeight.add((int)(600+Math.random()*150));
         }
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHodler(ViewGroup parent, int viewType) {
         return new WelfareView(LayoutInflater.from(context).inflate(R.layout.item_welfare_view,null));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        WelfareView welfareView=(WelfareView)holder;
+    public void onBindHolder(RecyclerView.ViewHolder viewHolder, int position, Gank data) {
+        WelfareView welfareView=(WelfareView)viewHolder;
         welfareView.bindView(listGank.get(position),position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return listGank.size();
     }
 
     class WelfareView extends RecyclerView.ViewHolder{
         private ImageView welfareItem;
+        private TextView welfareDate;
         public WelfareView(View itemView) {
             super(itemView);
             welfareItem=(ImageView)itemView.findViewById(R.id.welfare_item);
+            welfareDate=(TextView)itemView.findViewById(R.id.welfare_date);
         }
         public void bindView(Gank gank,int position){
+            welfareDate.setText(gank.desc);
             ViewGroup.LayoutParams lp = welfareItem.getLayoutParams();
             lp.height = listHeight.get(position);
             welfareItem.setLayoutParams(lp);
-
-            ImageLoad.displayImage(gank.url,welfareItem);
+            ImageLoad.displayImage(
+                    gank.url+"?ImageView2/0/w/"+(ScreenUtils.getScreenWidthDp(context)/2-350),
+                    welfareItem);
         }
     }
 

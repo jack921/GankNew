@@ -1,8 +1,9 @@
 package com.gank.jack.ganknew.adapter;
 
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.gank.jack.ganknew.interfaces.RefreshInterface;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.gank.jack.ganknew.utils.LogUtil;
 import android.view.LayoutInflater;
 import com.gank.jack.ganknew.R;
 import android.content.Context;
@@ -63,6 +64,49 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter{
         return NORMAL;
     }
 
+    //处理StaggeredGridLayout
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        if (isStaggeredGridLayout(holder)) {
+            handleLayoutIfStaggeredGridLayout(holder, holder.getLayoutPosition());
+        }
+    }
+
+    private boolean isStaggeredGridLayout(RecyclerView.ViewHolder holder) {
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        if (layoutParams != null && layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
+            return true;
+        }
+        return false;
+    }
+
+    protected void handleLayoutIfStaggeredGridLayout(RecyclerView.ViewHolder holder, int position) {
+        StaggeredGridLayoutManager.LayoutParams p=(StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
+        if(getItemViewType(position)==FOOTER){
+            p.setFullSpan(true);
+        }
+    }
+
+    //处理GridLayout
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+        if(manager instanceof GridLayoutManager) {
+            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if(getItemViewType(position)==FOOTER){
+                        return gridManager.getSpanCount();
+                    }
+                    return 1;
+                }
+            });
+        }
+    }
+
     @Override
     public int getItemCount() {
         return listData.size()+(status==true?1:0);
@@ -73,7 +117,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter{
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                notifyDataSetChanged();
+                notifyItemInserted(listData.size()+(status==true?1:0)-1);
             }
         });
     }
@@ -83,7 +127,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter{
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                notifyDataSetChanged();
+                notifyItemInserted(listData.size()+(status==true?1:0)-1);
             }
         });
     }
