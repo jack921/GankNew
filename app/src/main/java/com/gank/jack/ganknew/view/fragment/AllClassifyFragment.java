@@ -1,5 +1,6 @@
 package com.gank.jack.ganknew.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -18,6 +19,7 @@ import com.gank.jack.ganknew.adapter.ClassifyTabFragmentAdapter;
 import com.gank.jack.ganknew.api.Config;
 import com.gank.jack.ganknew.base.BaseFragment;
 import com.gank.jack.ganknew.view.activity.MainActivity;
+import com.gank.jack.ganknew.view.activity.TabSortActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +58,7 @@ public class AllClassifyFragment extends BaseFragment implements AppBarLayout.On
     }
 
     public void init(){
+
         tabTitle= Config.Aategory;
         listFragment=new ArrayList<>();
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
@@ -87,6 +90,7 @@ public class AllClassifyFragment extends BaseFragment implements AppBarLayout.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_sort:
+                startNewActivityByIntent(new Intent(getActivity(),TabSortActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
