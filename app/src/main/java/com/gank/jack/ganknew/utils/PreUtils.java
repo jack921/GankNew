@@ -14,14 +14,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.theme.Theme;
 import com.gank.jack.ganknew.theme.util.ColorUiUtil;
-import com.gank.jack.ganknew.view.activity.MainActivity;
 
 public class PreUtils {
-
     private static SharedPreferences getSharedPreferences(final Context context) {
         return android.preference.PreferenceManager.getDefaultSharedPreferences(context);
     }

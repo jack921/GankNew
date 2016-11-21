@@ -12,7 +12,7 @@
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
-        android:id="@+id/test"
+        android:id="@+id/classification_header"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 

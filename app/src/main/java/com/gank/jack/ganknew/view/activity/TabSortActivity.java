@@ -25,6 +25,7 @@ import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.bean.Sort;
 import com.gank.jack.ganknew.interfaces.onCheckBoxLintener;
 import com.gank.jack.ganknew.interfaces.onStartDragListener;
+import com.gank.jack.ganknew.utils.PreUtils;
 import com.gank.jack.ganknew.utils.ToastUtil;
 import com.gank.jack.ganknew.utils.widget.DividerItemDecoration;
 import com.gank.jack.ganknew.utils.widget.SimpleItemTouchHelperCallback;
@@ -45,8 +46,8 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
     public Toolbar toolbar;
     @Bind(R.id.sortRecyclerView)
     public RecyclerView sortRecyclerView;
-    @Bind(R.id.test)
-    public RelativeLayout test;
+    @Bind(R.id.classification_header)
+    public RelativeLayout classificationHeader;
 
     private ItemTouchHelper mItemTouchHelper;
     private SortAdapter sortAdapter;
@@ -62,33 +63,46 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
 
     public void init(){
         setSupportActionBar(toolbar);
-        listSort=new ArrayList<>();
-
         sortRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        sortRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
+//       sortRecyclerView.addItemDecoration(new DividerItemDecoration(
+//                                  this,DividerItemDecoration.VERTICAL_LIST));
 
-        for(int i=0;i< Config.Aategory.length-5;i++){
-            listSort.add(new Sort(Config.Aategory[i],false,false,true));
-        }
-        listSort.add(new Sort("",false,true,false));
-        for(int i=Config.Aategory.length-3;i<Config.Aategory.length;i++){
-            listSort.add(new Sort(Config.Aategory[i],false,false,true));
+        listSort=new ArrayList<>();
+        String tabData=PreUtils.getString(this,"TabMenu","");
+        //Sort(String title, boolean classify,boolean more, boolean normal,boolean choose)
+        if(!tabData.equals("")){
+            classificationHeader.setVisibility(View.GONE);
+            listSort.add(new Sort("",false,true,false,false));
+            for(int i=0;i< Config.Aategory.length;i++){
+                listSort.add(new Sort(Config.Aategory[i],false,false,true,false));
+            }
+        }else{
+            for(int i=0;i< Config.Aategory.length-3;i++){
+                listSort.add(new Sort(Config.Aategory[i],false,false,true,true));
+            }
+            listSort.add(new Sort("",false,true,false,false));
+            for(int i=Config.Aategory.length-3;i< Config.Aategory.length;i++){
+                listSort.add(new Sort(Config.Aategory[i],false,false,true,false));
+            }
         }
 
         sortAdapter=new SortAdapter(this,listSort,this);
         sortRecyclerView.setAdapter(sortAdapter);
         sortAdapter.addOnCheckBoxLintener(this);
-
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(sortAdapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(sortRecyclerView);
+
     }
 
     @Override
-    public void onCheckedChanged(ViewGroup view, boolean isChecked,
-                  RecyclerView.ViewHolder sortViewHolder) {
-        checkAnimator(view,sortViewHolder);
-
+    public void onCheckedChanged(CompoundButton buttonView,int position) {
+//            if(listSort.get(position).choose==true){
+//                listSort.get(position).choose=false;
+//                buttonView.setChecked(false);
+//            }else{
+//                buttonView.setChecked(true);
+//            }
     }
 
     @Override
@@ -96,8 +110,5 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
         mItemTouchHelper.startDrag(viewHolder);
     }
 
-    public void checkAnimator(ViewGroup viewGroup,RecyclerView.ViewHolder sortViewHolder){
-
-    }
 
 }
