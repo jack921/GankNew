@@ -1,6 +1,5 @@
 package com.gank.jack.ganknew.view.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;

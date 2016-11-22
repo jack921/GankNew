@@ -17,9 +17,6 @@ import com.gank.jack.ganknew.bean.Sort;
 import com.gank.jack.ganknew.interfaces.onCheckBoxLintener;
 import com.gank.jack.ganknew.interfaces.onMoveAndSortListener;
 import com.gank.jack.ganknew.interfaces.onStartDragListener;
-import com.gank.jack.ganknew.utils.LogUtil;
-
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -149,9 +146,11 @@ public class SortAdapter extends RecyclerView.Adapter
                 listSort.add(new Sort("",false,true,false,false));
                 notifyItemInserted(getItemCount()-1);
             }
+
             sort.choose=false;
             listSort.add(sort);
             notifyItemMoved(currentPosition,getItemCount()-1);
+
             if(listSort.get(0).classify==true&&listSort.get(1).more==true){
                 deleteClassify=true;
                 listSort.remove(0);
@@ -175,7 +174,7 @@ public class SortAdapter extends RecyclerView.Adapter
             }else{
                 notifyItemMoved(currentPosition,more);
             }
-            if(deleteClassify==true){
+            if(deleteClassify==true||listSort.get(0).classify!=true){
                 deleteClassify=false;
                 listSort.add(0,new Sort("",true,false,false,false));
                 notifyItemInserted(0);
