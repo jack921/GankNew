@@ -46,6 +46,8 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
 
     public void init(){
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.icon_back);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         sortRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //       sortRecyclerView.addItemDecoration(new DividerItemDecoration(
 //                                  this,DividerItemDecoration.VERTICAL_LIST));
