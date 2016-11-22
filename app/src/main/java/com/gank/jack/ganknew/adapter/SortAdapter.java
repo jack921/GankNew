@@ -90,12 +90,7 @@ public class SortAdapter extends RecyclerView.Adapter
 
     @Override
     public boolean onItemMove(RecyclerView.ViewHolder viewHolder,
-                              RecyclerView.ViewHolder target, int fromPosition, final int toPosition){
-//        boolean temp=listSort.get(fromPosition).choose;
-//        listSort.get(fromPosition).choose=false;
-//        Collections.swap(listSort,fromPosition,toPosition);
-//        notifyItemMoved(fromPosition,toPosition);
-
+              RecyclerView.ViewHolder target, int fromPosition, final int toPosition){
         Sort item = listSort.get(fromPosition);
         listSort.remove(fromPosition);
         listSort.add(toPosition ,item);
@@ -103,7 +98,7 @@ public class SortAdapter extends RecyclerView.Adapter
         return true;
     }
 
-    class SortItemView extends RecyclerView.ViewHolder{
+    public class SortItemView extends RecyclerView.ViewHolder{
         public CheckBox sortCheck;
         public TextView sortName;
         public RelativeLayout sortMenu;
