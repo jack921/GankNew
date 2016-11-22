@@ -46,8 +46,6 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
     public Toolbar toolbar;
     @Bind(R.id.sortRecyclerView)
     public RecyclerView sortRecyclerView;
-    @Bind(R.id.classification_header)
-    public RelativeLayout classificationHeader;
 
     private ItemTouchHelper mItemTouchHelper;
     private SortAdapter sortAdapter;
@@ -71,12 +69,12 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
         String tabData=PreUtils.getString(this,"TabMenu","");
         //Sort(String title, boolean classify,boolean more, boolean normal,boolean choose)
         if(!tabData.equals("")){
-            classificationHeader.setVisibility(View.GONE);
             listSort.add(new Sort("",false,true,false,false));
             for(int i=0;i< Config.Aategory.length;i++){
                 listSort.add(new Sort(Config.Aategory[i],false,false,true,false));
             }
         }else{
+            listSort.add(new Sort("",true,false,false,false));
             for(int i=0;i< Config.Aategory.length-3;i++){
                 listSort.add(new Sort(Config.Aategory[i],false,false,true,true));
             }

@@ -1,6 +1,7 @@
 package com.gank.jack.ganknew.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import com.gank.jack.ganknew.bean.Sort;
 import com.gank.jack.ganknew.interfaces.onCheckBoxLintener;
 import com.gank.jack.ganknew.interfaces.onMoveAndSortListener;
 import com.gank.jack.ganknew.interfaces.onStartDragListener;
+import com.gank.jack.ganknew.utils.LogUtil;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -31,6 +34,8 @@ public class SortAdapter extends RecyclerView.Adapter
     public onCheckBoxLintener onCheckBoxLintener;
     public onStartDragListener dragListener;
     public RecyclerView recyclerView;
+    boolean deleteMore=false;
+    boolean deleteClassify=false;
 
     public SortAdapter(Context context, List<Sort> listSort,onStartDragListener listener){
         this.context=context;
@@ -83,6 +88,21 @@ public class SortAdapter extends RecyclerView.Adapter
        }
     }
 
+    @Override
+    public boolean onItemMove(RecyclerView.ViewHolder viewHolder,
+                              RecyclerView.ViewHolder target, int fromPosition, final int toPosition){
+//        boolean temp=listSort.get(fromPosition).choose;
+//        listSort.get(fromPosition).choose=false;
+//        Collections.swap(listSort,fromPosition,toPosition);
+//        notifyItemMoved(fromPosition,toPosition);
+
+        Sort item = listSort.get(fromPosition);
+        listSort.remove(fromPosition);
+        listSort.add(toPosition ,item);
+        notifyItemMoved(fromPosition,toPosition);
+        return true;
+    }
+
     class SortItemView extends RecyclerView.ViewHolder{
         public CheckBox sortCheck;
         public TextView sortName;
@@ -129,9 +149,19 @@ public class SortAdapter extends RecyclerView.Adapter
         Sort sort=listSort.get(currentPosition);
         listSort.remove(currentPosition);
         if(sort.choose==true){
+            if(deleteMore==true){
+                deleteMore=false;
+                listSort.add(new Sort("",false,true,false,false));
+                notifyItemInserted(getItemCount()-1);
+            }
             sort.choose=false;
             listSort.add(sort);
             notifyItemMoved(currentPosition,getItemCount()-1);
+            if(listSort.get(0).classify==true&&listSort.get(1).more==true){
+                deleteClassify=true;
+                listSort.remove(0);
+                notifyItemRemoved(0);
+            }
         }else{
             int more = 0;
             for(int i=0;i<listSort.size();i++){
@@ -143,11 +173,17 @@ public class SortAdapter extends RecyclerView.Adapter
             sort.choose=true;
             listSort.add(more,sort);
             if(more==getItemCount()-2){
+                deleteMore=true;
                 notifyItemMoved(currentPosition,more);
-//                listSort.remove(getItemCount()-1);
-//                notifyDataSetChanged();
+                listSort.remove(getItemCount()-1);
+                notifyItemRemoved(getItemCount()-1);
             }else{
                 notifyItemMoved(currentPosition,more);
+            }
+            if(deleteClassify==true){
+                deleteClassify=false;
+                listSort.add(0,new Sort("",true,false,false,false));
+                notifyItemInserted(0);
             }
         }
 
@@ -159,13 +195,6 @@ public class SortAdapter extends RecyclerView.Adapter
             super(itemView);
             sortItem=(TextView)itemView.findViewById(R.id.sort_header_item);
         }
-    }
-
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(listSort, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
     }
 
 }

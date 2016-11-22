@@ -21,12 +21,8 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
      */
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        //设置拖拽方向为上下
         final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-        //设置侧滑方向为从左到右和从右到左都可以
-        //将方向参数设置进去
         return makeMovementFlags(dragFlags,0);
-
     }
 
     /**
@@ -34,12 +30,10 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
      */
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-//       //如果两个item不是一个类型的，我们让他不可以拖拽
-//       if (viewHolder.getItemViewType() != target.getItemViewType()) {
-//            return false;
-//       }
-        //回调adapter中的onItemMove方法
-        mAdapter.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+        if(target.getItemViewType()==1){
+            return false;
+        }
+        mAdapter.onItemMove(viewHolder,target,viewHolder.getAdapterPosition(),target.getAdapterPosition());
         return moveStatus;
     }
 
@@ -47,10 +41,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
      * 当我们侧滑item时会回调此方法
      */
     @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction){
-
-    }
-
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction){}
     @Override
     public boolean isLongPressDragEnabled() {
         return true;
