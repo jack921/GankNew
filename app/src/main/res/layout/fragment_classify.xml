@@ -26,11 +26,34 @@
             android:layout_height="25dp"
             android:background="?attr/colorPrimary"/>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/classify_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.design.widget.TabLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+
+           <android.support.design.widget.TabLayout
+               android:id="@+id/classify_tablayout"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="9">
+           </android.support.design.widget.TabLayout>
+
+           <RelativeLayout
+               android:id="@+id/sort_tab"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1.3">
+
+               <ImageView
+                   android:layout_width="18dp"
+                   android:layout_height="18dp"
+                   android:layout_centerInParent="true"
+                   android:src="@drawable/icon_xiajiantou"/>
+
+           </RelativeLayout>
+
+       </LinearLayout>
+
 
     </android.support.design.widget.AppBarLayout>
 

@@ -22,6 +22,9 @@ import com.gank.jack.ganknew.bean.Sort;
 import butterknife.ButterKnife;
 import android.os.Bundle;
 import com.gank.jack.ganknew.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
@@ -48,9 +51,11 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStatusBarTintColor(R.attr.colorPrimary);
         setContentView(R.layout.activity_sort);
         ButterKnife.bind(this);
         init();
+        initView();
     }
 
     public void init(){
@@ -68,27 +73,25 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
         sortRecyclerView.addItemDecoration(new DividerItemDecoration(
                 this,DividerItemDecoration.VERTICAL_LIST));
         tabSortPersenter=new TabSortPersenter(this);
-
         listSort=new ArrayList<>();
-        String tabData= SPUtils.getString(this,"TabMenu","TabGson");
+    }
 
-        //Sort(String title, boolean classify,boolean more, boolean normal,boolean choose)
-        if(tabData!=null){
-            listSort.add(new Sort("",false,true,false,false));
-            for(int i=0;i< Config.Aategory.length;i++){
-                listSort.add(new Sort(Config.Aategory[i],false,false,true,false));
-            }
-        }else{
+    public void initView(){
+        String tabData= SPUtils.getString(this,"TabMenu","TabGson");
+        if(tabData==null){
             listSort.add(new Sort("",true,false,false,false));
-            for(int i=0;i< Config.Aategory.length-3;i++){
+            for(int i=0;i<2;i++){
                 listSort.add(new Sort(Config.Aategory[i],false,false,true,true));
             }
             listSort.add(new Sort("",false,true,false,false));
-            for(int i=Config.Aategory.length-3;i< Config.Aategory.length;i++){
+            for(int i=2;i<Config.Aategory.length;i++){
                 listSort.add(new Sort(Config.Aategory[i],false,false,true,false));
             }
+            SPUtils.put(TabSortActivity.this,"TabMenu","TabGson",new Gson().toJson(listSort));
+        }else{
+            List<Sort> tempListSort=new Gson().fromJson(tabData,new TypeToken<List<Sort>>(){}.getType());
+            listSort.addAll(tempListSort);
         }
-
         sortAdapter=new SortAdapter(this,listSort,this);
         sortRecyclerView.setAdapter(sortAdapter);
         sortAdapter.addOnCheckBoxLintener(this);
