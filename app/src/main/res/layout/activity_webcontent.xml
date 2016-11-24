@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,12 +7,13 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/web_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/web_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -20,6 +21,43 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <ProgressBar
+        android:id="@+id/webview_pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="3dip"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:layout_below="@+id/web_appbar"
+        android:progressDrawable="@drawable/progress_bar_states" >
+    </ProgressBar>
 
+    <WebView
+        android:id="@+id/web_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/webview_pb"/>
 
-</android.support.design.widget.CoordinatorLayout>
+   <LinearLayout
+       android:id="@+id/load_error"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:layout_gravity="center"
+       android:visibility="gone">
+
+       <ImageView
+           android:layout_width="80dp"
+           android:layout_height="80dp"
+           android:layout_gravity="center"
+           android:src="@drawable/icon_loaderror"/>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:text="@string/load_error"/>
+
+   </LinearLayout>
+
+</RelativeLayout>

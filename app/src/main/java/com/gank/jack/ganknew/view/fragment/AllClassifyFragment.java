@@ -9,27 +9,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.ClassifyTabFragmentAdapter;
 import com.gank.jack.ganknew.api.Config;
 import com.gank.jack.ganknew.base.BaseFragment;
 import com.gank.jack.ganknew.bean.Sort;
+import com.gank.jack.ganknew.interfaces.AllClassifyInterface;
+import com.gank.jack.ganknew.presenter.AllClassifyPersenter;
 import com.gank.jack.ganknew.utils.SPUtils;
 import com.gank.jack.ganknew.view.activity.MainActivity;
 import com.gank.jack.ganknew.view.activity.TabSortActivity;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -37,7 +34,8 @@ import butterknife.ButterKnife;
  * Created by Jack on 2016/10/31.
  */
 
-public class AllClassifyFragment extends BaseFragment implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener {
+public class AllClassifyFragment extends BaseFragment
+        implements View.OnClickListener,AllClassifyInterface {
 
     @Bind(R.id.classify_tablayout)
     public TabLayout tabLayout;
@@ -47,60 +45,56 @@ public class AllClassifyFragment extends BaseFragment implements AppBarLayout.On
     public ViewPager viewpager;
     @Bind(R.id.classify_barlayout)
     public AppBarLayout classifyBarlayout;
-    @Bind(R.id.statusbar)
-    public View statusbar;
     @Bind(R.id.sort_tab)
     public RelativeLayout sortTab;
+
     private String[] tabTitle;
     private List<Fragment> listFragment;
+    private ClassifyTabFragmentAdapter adapter;
+    private AllClassifyPersenter allClassifyPersenter;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                   @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_classify,container,false);
+        EventBus.getDefault().register(this);
         setHasOptionsMenu(true);
         ButterKnife.bind(this,view);
         init();
-        initView();
         return view;
     }
 
     public void init(){
         tabTitle= Config.Aategory;
+        allClassifyPersenter=new AllClassifyPersenter(getActivity());
         listFragment=new ArrayList<>();
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         toolbar.setTitle(getString(R.string.type_browse));
         sortTab.setOnClickListener(this);
-    }
 
-    public void initView(){
         String tabData= SPUtils.getString(getActivity(),"TabMenu","TabGson");
-        List<Sort> tempListSort=new Gson().fromJson(tabData,new TypeToken<List<Sort>>(){}.getType());
-        for(int i=0;i<tempListSort.size();i++){
-            if(tempListSort.get(i).normal==true&&tempListSort.get(i).choose==true){
-                tabLayout.addTab(tabLayout.newTab().setText(tempListSort.get(i).title));
-                Bundle bundle=new Bundle();
-                bundle.putString("TabTitle",tempListSort.get(i).title);
-                ClassifyTabFragment classifyTabFragment=new ClassifyTabFragment();
-                classifyTabFragment.setArguments(bundle);
-                listFragment.add(classifyTabFragment);
-            }
+        if(tabData!=null){
+            allClassifyPersenter.initAllTabData(this,tabData,tabLayout,listFragment);
+        }else{
+            allClassifyPersenter.initNotAllTabData(this,tabLayout,listFragment);
         }
-        ClassifyTabFragmentAdapter adapter = new ClassifyTabFragmentAdapter(
-                getActivity().getSupportFragmentManager(),listFragment,tabTitle);
-        viewpager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewpager);
-        tabLayout.setTabsFromPagerAdapter(adapter);
-        classifyBarlayout.addOnOffsetChangedListener(this);
     }
 
     @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        if(verticalOffset==0){
-            statusbar.setVisibility(View.GONE);
-        }else{
-            statusbar.setVisibility(View.VISIBLE);
+    public void initViewData(TabLayout tabLayout, List<Fragment> listFragment) {
+        adapter = new ClassifyTabFragmentAdapter(getActivity()
+                .getSupportFragmentManager(),listFragment,tabTitle);
+        viewpager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewpager);
+    }
+
+    @Override
+    public void updateTabClassify(boolean result) {
+        if(result==true){
+            adapter.notifyDataSetChanged();
+            tabLayout.setupWithViewPager(viewpager);
         }
     }
 
@@ -111,6 +105,17 @@ public class AllClassifyFragment extends BaseFragment implements AppBarLayout.On
                 startNewActivityByIntent(new Intent(getActivity(),TabSortActivity.class));
              break;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updateTab(List<Sort> listSort){
+        allClassifyPersenter.updatTabClassify(this,listSort,tabLayout,listFragment);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
 }

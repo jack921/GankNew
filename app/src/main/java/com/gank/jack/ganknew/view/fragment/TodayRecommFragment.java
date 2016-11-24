@@ -1,5 +1,6 @@
 package com.gank.jack.ganknew.view.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,11 +20,14 @@ import com.gank.jack.ganknew.adapter.TodayRecommAdapter;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.base.BaseFragment;
 import com.gank.jack.ganknew.bean.Gank;
+import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.interfaces.TodayRecommInterface;
 import com.gank.jack.ganknew.presenter.TodayRecommPresenter;
 import com.gank.jack.ganknew.theme.Theme;
 import com.gank.jack.ganknew.utils.ImageLoad;
 import com.gank.jack.ganknew.utils.PreUtils;
+import com.gank.jack.ganknew.view.activity.WebContentActivity;
+
 import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,7 +40,7 @@ import butterknife.OnClick;
 public class TodayRecommFragment extends BaseFragment implements
         AppBarLayout.OnOffsetChangedListener,
         SwipeRefreshLayout.OnRefreshListener,
-        TodayRecommInterface{
+        TodayRecommInterface, OnClickLintener {
 
     @Bind(R.id.fab)
     public FloatingActionButton fab;
@@ -107,6 +111,7 @@ public class TodayRecommFragment extends BaseFragment implements
             ImageLoad.displayImage(listGank.get(listGank.size()-1).url,todayGankImage);
         }
         todayRecommAdapter=new TodayRecommAdapter(getActivity(),this.listGank);
+        todayRecommAdapter.setOnClickLintener(this);
         todayRecyclerview.setAdapter(todayRecommAdapter);
         todaySwipeRefreshLayout.setRefreshing(false);
     }
@@ -115,6 +120,13 @@ public class TodayRecommFragment extends BaseFragment implements
     @Override
     public void onError(Throwable throwable) {
         showToast(getActivity().getString(R.string.net_error));
+    }
+
+    @Override
+    public void onClick(View v, int position) {
+        Intent intent=new Intent(getActivity(),WebContentActivity.class);
+        intent.putExtra("url",listGank.get(position).url);
+        startActivity(intent);
     }
 
 }

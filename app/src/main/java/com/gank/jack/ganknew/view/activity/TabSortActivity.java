@@ -5,7 +5,6 @@ import com.gank.jack.ganknew.presenter.TabSortPersenter;
 import com.gank.jack.ganknew.utils.SPUtils;
 import com.gank.jack.ganknew.utils.widget.DividerItemDecoration;
 import com.gank.jack.ganknew.utils.widget.SimpleItemTouchHelperCallback;
-import com.gank.jack.ganknew.interfaces.onCheckBoxLintener;
 import com.gank.jack.ganknew.interfaces.onStartDragListener;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -16,7 +15,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.CompoundButton;
 import com.gank.jack.ganknew.api.Config;
 import com.gank.jack.ganknew.bean.Sort;
 import butterknife.ButterKnife;
@@ -33,7 +31,7 @@ import butterknife.Bind;
  * Created by Jack on 2016/11/14.
  */
 
-public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
+public class TabSortActivity extends BaseActivity implements
         onStartDragListener,View.OnClickListener,SortTabIntetface {
 
     @Bind(R.id.sortToolbar)
@@ -51,7 +49,7 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStatusBarTintColor(R.attr.colorPrimary);
+//        setStatusBarTintColor(R.attr.colorPrimary);
         setContentView(R.layout.activity_sort);
         ButterKnife.bind(this);
         init();
@@ -94,16 +92,10 @@ public class TabSortActivity extends BaseActivity implements onCheckBoxLintener,
         }
         sortAdapter=new SortAdapter(this,listSort,this);
         sortRecyclerView.setAdapter(sortAdapter);
-        sortAdapter.addOnCheckBoxLintener(this);
         ItemTouchHelper.Callback callback =
                 new SimpleItemTouchHelperCallback(sortAdapter,listSort);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(sortRecyclerView);
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView,int position) {
-
     }
 
     @Override

@@ -96,7 +96,9 @@ public class ClassifyTabFragment extends BaseFragment implements ClassifyTabInte
 
     @Override
     public void onClick(View v, int position) {
-        startActivity(new Intent(getActivity(),WebContentActivity.class));
+        Intent intent=new Intent(getActivity(),WebContentActivity.class);
+        intent.putExtra("url",tabListGank.get(position).url);
+        startActivity(intent);
     }
 
 }

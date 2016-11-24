@@ -1,7 +1,7 @@
 package com.gank.jack.ganknew.adapter;
 
-import android.content.Context;
-import android.os.Handler;
+import com.gank.jack.ganknew.interfaces.onMoveAndSortListener;
+import com.gank.jack.ganknew.interfaces.onStartDragListener;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,14 +9,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import com.gank.jack.ganknew.bean.Sort;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.content.Context;
 import android.widget.TextView;
 import com.gank.jack.ganknew.R;
-import com.gank.jack.ganknew.bean.Sort;
-import com.gank.jack.ganknew.interfaces.onCheckBoxLintener;
-import com.gank.jack.ganknew.interfaces.onMoveAndSortListener;
-import com.gank.jack.ganknew.interfaces.onStartDragListener;
 import java.util.List;
 
 /**
@@ -28,7 +26,6 @@ public class SortAdapter extends RecyclerView.Adapter
 
     private Context context;
     private List<Sort> listSort;
-    public onCheckBoxLintener onCheckBoxLintener;
     public onStartDragListener dragListener;
     public RecyclerView recyclerView;
     boolean deleteMore=false;
@@ -38,10 +35,6 @@ public class SortAdapter extends RecyclerView.Adapter
         this.context=context;
         this.listSort=listSort;
         this.dragListener = listener;
-    }
-
-    public void addOnCheckBoxLintener(onCheckBoxLintener onCheckBoxLintener) {
-        this.onCheckBoxLintener = onCheckBoxLintener;
     }
 
     @Override
@@ -124,15 +117,12 @@ public class SortAdapter extends RecyclerView.Adapter
                     }
                 });
             }
-            if(onCheckBoxLintener!=null){
-                sortCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        moveToMore(getAdapterPosition());
-                        onCheckBoxLintener.onCheckedChanged(buttonView,getAdapterPosition());
-                    }
-                });
-            }
+            sortCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    moveToMore(getAdapterPosition());
+                }
+            });
         }
 
     }

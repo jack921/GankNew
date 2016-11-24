@@ -26,7 +26,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile 'com.android.support:design:24.1.1'
-//  compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'

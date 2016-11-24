@@ -12,6 +12,7 @@ import com.gank.jack.ganknew.api.GankApiFactory;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.bean.ImageType;
 import com.gank.jack.ganknew.interfaces.IImageInfo;
+import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.utils.ImageLoad;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,15 @@ public class TodayRecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private List<Gank> listGank;
     private final int HEADER=0;
     private final int NORMAL=1;
+    private OnClickLintener onClickLintener;
 
     public TodayRecommAdapter(Context context, List<Gank> listGank){
         this.context=context;
         this.listGank=addHeadItem(listGank);
+    }
+
+    public void setOnClickLintener(OnClickLintener onClickLintener) {
+        this.onClickLintener = onClickLintener;
     }
 
     public List<Gank> addHeadItem(List<Gank> tempListGank){
@@ -100,11 +106,21 @@ public class TodayRecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     class ItemView extends RecyclerView.ViewHolder {
         public TextView itemText;
         public ImageView itemImage;
+
         public ItemView(View itemView) {
             super(itemView);
             itemText = (TextView) itemView.findViewById(R.id.main_item_content);
             itemImage = (ImageView) itemView.findViewById(R.id.main_item_image);
+            if(onClickLintener!=null){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onClickLintener.onClick(view,getAdapterPosition());
+                    }
+                });
+            }
         }
+
         public void bindItem(final Gank gank) {
             itemImage.setVisibility(View.GONE);
             itemText.setText(gank.desc);
@@ -128,6 +144,7 @@ public class TodayRecommAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
               }
             }
         }
+
     }
 
 
