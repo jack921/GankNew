@@ -1,12 +1,13 @@
 package com.gank.jack.ganknew.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Jack on 2016/11/4.
  */
 
-public class Gank implements Cloneable{
+public class Gank implements Cloneable,Serializable{
     public String _id;
     public String createdAt;
     public String desc;

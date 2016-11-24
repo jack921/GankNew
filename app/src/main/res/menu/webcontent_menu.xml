@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_collect"
+        android:title="@string/collect"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/icon_yishoucang" />
+    <item
+        android:id="@+id/action_share"
+        android:title="@string/share"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_browser"
+        android:title="@string/usebrowser"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_copy"
+        android:title="@string/copyurl"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+</menu>

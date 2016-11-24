@@ -126,6 +126,7 @@ public class TodayRecommFragment extends BaseFragment implements
     public void onClick(View v, int position) {
         Intent intent=new Intent(getActivity(),WebContentActivity.class);
         intent.putExtra("url",listGank.get(position).url);
+        intent.putExtra("gank",listGank.get(position));
         startActivity(intent);
     }
 

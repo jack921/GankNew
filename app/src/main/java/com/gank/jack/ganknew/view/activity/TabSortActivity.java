@@ -49,7 +49,6 @@ public class TabSortActivity extends BaseActivity implements
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setStatusBarTintColor(R.attr.colorPrimary);
         setContentView(R.layout.activity_sort);
         ButterKnife.bind(this);
         init();
@@ -58,7 +57,7 @@ public class TabSortActivity extends BaseActivity implements
 
     public void init(){
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.icon_back);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         sortFinishButton.setOnClickListener(this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

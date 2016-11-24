@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GankNew</string>
 
+    <string name="umengkey">58372916ae1bf8761e000a1d</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -15,6 +17,10 @@
     <string name="net_error">网络出错了,怪我咯</string>
     <string name="load_error">加载失败\n点击重新加载</string>
     <string name="sort">排序</string>
-
+    <string name="share">分享</string>
+    <string name="collect">收藏</string>
+    <string name="usebrowser">用浏览器浏览</string>
+    <string name="copyurl">复制这个url</string>
+    <string name="hascopy">已复制到粘贴板上</string>
 
 </resources>
