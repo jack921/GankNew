@@ -6,7 +6,7 @@
         android:title="@string/collect"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:icon="@drawable/icon_yishoucang" />
+        android:icon="@drawable/icon_weishoucang" />
     <item
         android:id="@+id/action_share"
         android:title="@string/share"

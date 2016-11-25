@@ -133,4 +133,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return true;
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        int position=savedInstanceState.getInt("showNum");
+        setTabFragment(position);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt("showNum",0);
+    }
+
 }

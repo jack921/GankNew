@@ -26,7 +26,8 @@ import butterknife.ButterKnife;
  * Created by Jack on 2016/10/31.
  */
 
-public class FemaleWelfareFragment extends BaseFragment implements WelfaceInterface, RefreshInterface, SwipeRefreshLayout.OnRefreshListener {
+public class FemaleWelfareFragment extends BaseFragment implements
+        WelfaceInterface, RefreshInterface, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.welfare_toolbar)
     public Toolbar welfare_toolbar;
@@ -53,6 +54,7 @@ public class FemaleWelfareFragment extends BaseFragment implements WelfaceInterf
     public void init(){
         listGank=new ArrayList<>();
         ((BaseActivity)getActivity()).setSupportActionBar(welfare_toolbar);
+        welfare_toolbar.setTitle(getString(R.string.meizifuli));
         welfareRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         welfarePresenter=new WelfarePresenter(getActivity());
         welfareAdapter=new WelfareAdapter(getActivity(),this.listGank);

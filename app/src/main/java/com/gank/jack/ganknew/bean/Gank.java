@@ -17,6 +17,7 @@ public class Gank implements Cloneable,Serializable{
     public String url;
     public boolean used;
     public String who;
+
     public List<String> images;
 
     public boolean isHeader;

@@ -22,5 +22,8 @@
     <string name="usebrowser">用浏览器浏览</string>
     <string name="copyurl">复制这个url</string>
     <string name="hascopy">已复制到粘贴板上</string>
+    <string name="collectsuccess">收藏成功</string>
+    <string name="meizifuli">妹子福利</string>
+    <string name="mycollect">我的收藏</string>
 
 </resources>

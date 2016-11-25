@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -20,6 +19,7 @@ import android.widget.ProgressBar;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.bean.Gank;
+import com.gank.jack.ganknew.database.GankSQLiteImpl;
 import com.gank.jack.ganknew.utils.Utils;
 import com.gank.jack.ganknew.utils.widget.MyWebViewClient;
 import butterknife.Bind;
@@ -118,7 +118,7 @@ public class WebContentActivity extends BaseActivity implements View.OnClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_collect:
-
+                saveGank(item);
                 break;
             case R.id.action_share:
 
@@ -132,11 +132,18 @@ public class WebContentActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.action_copy:
                 if(Utils.copy(gank.url,this)){
-                    Snackbar.make(webToolbar,getString(R.string.hascopy),Snackbar.LENGTH_SHORT).show();
+                    showSnackbar(getString(R.string.hascopy));
                 }
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void saveGank(MenuItem item){
+        if(GankSQLiteImpl.saveCollectGank(gank)){
+            showSnackbar(getString(R.string.collectsuccess));
+            item.setIcon(R.drawable.icon_yishoucang);
+        }
     }
 
     @Override
