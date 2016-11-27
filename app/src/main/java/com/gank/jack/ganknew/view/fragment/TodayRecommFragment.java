@@ -28,6 +28,7 @@ import com.gank.jack.ganknew.utils.ImageLoad;
 import com.gank.jack.ganknew.utils.PreUtils;
 import com.gank.jack.ganknew.view.activity.WebContentActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -110,6 +111,7 @@ public class TodayRecommFragment extends BaseFragment implements
         if(listGank.get(listGank.size()-1).type.equals("福利")){
             ImageLoad.displayImage(listGank.get(listGank.size()-1).url,todayGankImage);
         }
+        todayRecommPresenter.addHeadItem(this.listGank);
         todayRecommAdapter=new TodayRecommAdapter(getActivity(),this.listGank);
         todayRecommAdapter.setOnClickLintener(this);
         todayRecyclerview.setAdapter(todayRecommAdapter);
@@ -125,9 +127,9 @@ public class TodayRecommFragment extends BaseFragment implements
     @Override
     public void onClick(View v, int position) {
         Intent intent=new Intent(getActivity(),WebContentActivity.class);
-        intent.putExtra("url",listGank.get(position).url);
+        intent.putExtra("collectTag",false);
         intent.putExtra("gank",listGank.get(position));
-        startActivity(intent);
+        startNewActivityByIntent(intent);
     }
 
 }

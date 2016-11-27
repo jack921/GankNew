@@ -28,10 +28,10 @@ public class GankSQLiteImpl {
 
     //获取所有保存的数据
     public static List<Gank> getCollectGank() {
+        List<Gank> listGank = new ArrayList<>();
         try {
             getGankdb();
             Cursor cursor = gankdb.query("gank", null, null, null, null, null, null);
-            List<Gank> listGank = new ArrayList<>();
             if (cursor.moveToFirst()) {
                 int idColumn = cursor.getColumnIndex("id");
                 int createdAtColumn = cursor.getColumnIndex("createAt");
@@ -59,10 +59,10 @@ public class GankSQLiteImpl {
                 return listGank;
             }else{
                 cursor.close();
-                return null;
+                return listGank;
             }
         } catch (Exception e) {
-            return null;
+            return listGank;
         }
     }
 

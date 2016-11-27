@@ -18,10 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.base.BaseActivity;
+import com.gank.jack.ganknew.bean.CollectGank;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.database.GankSQLiteImpl;
 import com.gank.jack.ganknew.utils.Utils;
 import com.gank.jack.ganknew.utils.widget.MyWebViewClient;
+
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -42,6 +46,7 @@ public class WebContentActivity extends BaseActivity implements View.OnClickList
     public Toolbar webToolbar;
 
     private Gank gank;
+    private boolean collectStatus=false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,6 +116,18 @@ public class WebContentActivity extends BaseActivity implements View.OnClickList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.webcontent_menu,menu);
+        if(getIntent().getBooleanExtra("collectTag",false)){
+            menu.getItem(0).setIcon(R.drawable.icon_yishoucang);
+            collectStatus=true;
+        }else{
+            if(GankSQLiteImpl.queryCollectGank(gank._id)){
+                menu.getItem(0).setIcon(R.drawable.icon_yishoucang);
+                collectStatus=true;
+            }else{
+                menu.getItem(0).setIcon(R.drawable.icon_weishoucang);
+                collectStatus=false;
+            }
+        }
         return true;
     }
 
@@ -118,7 +135,7 @@ public class WebContentActivity extends BaseActivity implements View.OnClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_collect:
-                saveGank(item);
+                dealCollect(item);
                 break;
             case R.id.action_share:
 
@@ -139,10 +156,31 @@ public class WebContentActivity extends BaseActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
+    public void dealCollect(MenuItem item){
+          if(collectStatus==true){
+              deleteGank(item);
+          }else{
+              saveGank(item);
+          }
+    }
+
     public void saveGank(MenuItem item){
         if(GankSQLiteImpl.saveCollectGank(gank)){
             showSnackbar(getString(R.string.collectsuccess));
             item.setIcon(R.drawable.icon_yishoucang);
+            EventBus.getDefault().post(new CollectGank(true,gank));
+        }else{
+            showSnackbar(getString(R.string.collectfail));
+        }
+    }
+
+    public void deleteGank(MenuItem item){
+        if(GankSQLiteImpl.deleteCollectGank(gank._id)){
+            showSnackbar(getString(R.string.cancelcollect));
+            item.setIcon(R.drawable.icon_weishoucang);
+            EventBus.getDefault().post(new CollectGank(false,gank));
+        }else{
+            showSnackbar(getString(R.string.cancelcollectfail));
         }
     }
 

@@ -23,7 +23,11 @@
     <string name="copyurl">复制这个url</string>
     <string name="hascopy">已复制到粘贴板上</string>
     <string name="collectsuccess">收藏成功</string>
+    <string name="collectfail">收藏失败</string>
+    <string name="cancelcollect">取消收藏成功</string>
+    <string name="cancelcollectfail">取消收藏失败</string>
     <string name="meizifuli">妹子福利</string>
     <string name="mycollect">我的收藏</string>
+    <string name="no_collect_tip">没有收藏哦</string>
 
 </resources>

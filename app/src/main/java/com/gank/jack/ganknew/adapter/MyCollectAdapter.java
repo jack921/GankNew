@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.bean.Gank;
+import com.gank.jack.ganknew.interfaces.OnClickLintener;
+
 import java.util.List;
 
 /**
@@ -19,10 +21,15 @@ public class MyCollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private Context context;
     private List<Gank> listGank;
+    private OnClickLintener onClickLintener;
 
     public MyCollectAdapter(Context context,List<Gank> listGank){
         this.context=context;
         this.listGank=listGank;
+    }
+
+    public void setOnClickLintener(OnClickLintener onClickLintener){
+        this.onClickLintener=onClickLintener;
     }
 
     @Override
@@ -51,6 +58,14 @@ public class MyCollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             title=(TextView)itemView.findViewById(R.id.collectitem_title);
             name=(TextView)itemView.findViewById(R.id.collectitem_name);
             icon=(ImageView)itemView.findViewById(R.id.collectitem_img);
+            if(onClickLintener!=null){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onClickLintener.onClick(v,getAdapterPosition());
+                    }
+                });
+            }
         }
 
         public void bindView(Gank gank){
