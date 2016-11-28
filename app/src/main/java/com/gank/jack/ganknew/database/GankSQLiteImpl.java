@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.gank.jack.ganknew.base.MyApplication;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.utils.LogUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 

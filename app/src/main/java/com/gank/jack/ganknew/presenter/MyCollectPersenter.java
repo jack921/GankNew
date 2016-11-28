@@ -50,7 +50,12 @@ public class MyCollectPersenter extends BasePresenter{
         if(collectGank.action==true){
             listGank.add(collectGank.gank);
         }else{
-            listGank.remove(collectGank.gank);
+            for(int i=0;i<listGank.size();i++){
+                if(listGank.get(i)._id.equals(collectGank.gank._id)){
+                    listGank.remove(i);
+                    break;
+                }
+            }
         }
         myCollectAdapter.notifyDataSetChanged();
     }
