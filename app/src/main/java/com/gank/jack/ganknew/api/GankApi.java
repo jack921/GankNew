@@ -3,6 +3,7 @@ package com.gank.jack.ganknew.api;
 
 import com.gank.jack.ganknew.bean.GankModel;
 import com.gank.jack.ganknew.bean.ImageType;
+import com.gank.jack.ganknew.bean.SelectDate;
 import com.gank.jack.ganknew.bean.TodayGank;
 
 import retrofit2.http.GET;
@@ -52,5 +53,8 @@ public interface GankApi {
     @GET
     Observable<ImageType> GankImageInfo(@Url String url);
 
+//  获取发过干货日期接口
+    @GET("day/history")
+    Observable<SelectDate> getAllSelectDate();
 
 }

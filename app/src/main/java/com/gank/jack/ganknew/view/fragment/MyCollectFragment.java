@@ -44,12 +44,11 @@ public class MyCollectFragment extends BaseFragment implements OnClickLintener {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                   @Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_collect,container,false);
         EventBus.getDefault().register(this);
         ButterKnife.bind(this,view);
-
         init();
         initView();
         return view;
@@ -68,8 +67,11 @@ public class MyCollectFragment extends BaseFragment implements OnClickLintener {
         listGank= GankSQLiteImpl.getCollectGank();
         myCollectAdapter=new MyCollectAdapter(getActivity(),listGank);
         myCollectAdapter.setOnClickLintener(this);
-        myCollectPersenter.initView(listGank,myCollectAdapter,
-                collectRecyclerview,noCollectDataTip);
+        collectRecyclerview.setAdapter(myCollectAdapter);
+        if(listGank.size()==0){
+            noCollectDataTip.setVisibility(View.VISIBLE);
+            collectRecyclerview.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -81,6 +83,7 @@ public class MyCollectFragment extends BaseFragment implements OnClickLintener {
     public void updateCollectData(CollectGank collectGank){
         myCollectPersenter.updateCollectData(listGank,
                 myCollectAdapter,collectRecyclerview,noCollectDataTip,collectGank);
+        myCollectAdapter.notifyDataSetChanged();
     }
 
     @Override

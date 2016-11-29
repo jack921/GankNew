@@ -10,6 +10,7 @@ import com.gank.jack.ganknew.adapter.MyCollectAdapter;
 import com.gank.jack.ganknew.bean.CollectGank;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.view.activity.WebContentActivity;
+import com.gank.jack.ganknew.view.fragment.MyCollectFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +23,6 @@ public class MyCollectPersenter extends BasePresenter{
 
     public MyCollectPersenter(Context context) {
         super(context);
-    }
-
-    public void initView(List<Gank> listGank,MyCollectAdapter myCollectAdapter,
-                         RecyclerView collectRecyclerview,LinearLayout noCollectDataTip){
-        myCollectAdapter=new MyCollectAdapter(context,listGank);
-        collectRecyclerview.setAdapter(myCollectAdapter);
-        if(listGank.size()==0){
-            noCollectDataTip.setVisibility(View.VISIBLE);
-            collectRecyclerview.setVisibility(View.GONE);
-        }
     }
 
     public void onItemOnClick(Gank gank){
@@ -57,7 +48,7 @@ public class MyCollectPersenter extends BasePresenter{
                 }
             }
         }
-        myCollectAdapter.notifyDataSetChanged();
+//        myCollectAdapter.notifyDataSetChanged();
     }
 
 }

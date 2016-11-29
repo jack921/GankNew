@@ -51,13 +51,13 @@ public class MyCollectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     class CollectItem extends RecyclerView.ViewHolder{
         private TextView title;
         private TextView name;
-        private ImageView icon;
+//      private ImageView icon;
 
         public CollectItem(View itemView) {
             super(itemView);
             title=(TextView)itemView.findViewById(R.id.collectitem_title);
             name=(TextView)itemView.findViewById(R.id.collectitem_name);
-            icon=(ImageView)itemView.findViewById(R.id.collectitem_img);
+//          icon=(ImageView)itemView.findViewById(R.id.collectitem_img);
             if(onClickLintener!=null){
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

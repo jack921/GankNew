@@ -23,6 +23,7 @@
 
         <activity android:name=".view.activity.WebContentActivity"></activity>
         <activity android:name=".view.activity.TabSortActivity"></activity>
+        <activity android:name=".view.activity.SelectDateActivity"></activity>
 
     </application>
 

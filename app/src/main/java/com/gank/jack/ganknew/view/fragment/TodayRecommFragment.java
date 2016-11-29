@@ -27,8 +27,6 @@ import com.gank.jack.ganknew.theme.Theme;
 import com.gank.jack.ganknew.utils.ImageLoad;
 import com.gank.jack.ganknew.utils.PreUtils;
 import com.gank.jack.ganknew.view.activity.WebContentActivity;
-
-import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,8 +41,8 @@ public class TodayRecommFragment extends BaseFragment implements
         SwipeRefreshLayout.OnRefreshListener,
         TodayRecommInterface, OnClickLintener {
 
-    @Bind(R.id.fab)
-    public FloatingActionButton fab;
+//    @Bind(R.id.today_fab)
+//    public FloatingActionButton todayFab;
     @Bind(R.id.tool_bar)
     public Toolbar toolbar;
     @Bind(R.id.collapsing_toolbar)
@@ -78,14 +76,6 @@ public class TodayRecommFragment extends BaseFragment implements
         todaySwipeRefreshLayout.setOnRefreshListener(this);
         todayRecommPresenter=new TodayRecommPresenter(getActivity());
         todayRecommPresenter.getTodayRecommData(this,"2016","11","07");
-    }
-
-    @OnClick(R.id.fab)
-    public void onClickFad(){
-        PreUtils.changeTheme(getActivity(),R.style.BlueTheme, Theme.Blue.toString());
-        PreUtils.changeColorImpl(getActivity(),getActivity().getTheme());
-        collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
-        collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
     }
 
     @Override
@@ -130,6 +120,20 @@ public class TodayRecommFragment extends BaseFragment implements
         intent.putExtra("collectTag",false);
         intent.putExtra("gank",listGank.get(position));
         startNewActivityByIntent(intent);
+    }
+
+    @OnClick(R.id.today_fab)
+    public void viewOnClick(View v){
+        switch(v.getId()){
+            case R.id.today_fab:
+//                PreUtils.changeTheme(getActivity(),R.style.BlueTheme, Theme.Blue.toString());
+//                PreUtils.changeColorImpl(getActivity(),getActivity().getTheme());
+//                collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
+//                collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
+
+
+                break;
+        }
     }
 
 }
