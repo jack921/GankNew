@@ -5,7 +5,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.gank.jack.ganknew.adapter.SortAdapter;
 import com.gank.jack.ganknew.bean.Sort;
-import com.gank.jack.ganknew.interfaces.onMoveAndSortListener;
+import com.gank.jack.ganknew.interfaces.OnMoveAndSortListener;
 
 import java.util.List;
 
@@ -14,11 +14,11 @@ import java.util.List;
  */
 
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
-    private onMoveAndSortListener mAdapter;
+    private OnMoveAndSortListener mAdapter;
     private boolean moveStatus=true;
     private List<Sort> listSort;
 
-    public SimpleItemTouchHelperCallback(onMoveAndSortListener listener,List<Sort> listSort) {
+    public SimpleItemTouchHelperCallback(OnMoveAndSortListener listener, List<Sort> listSort) {
         this.mAdapter = listener;
         this.listSort=listSort;
     }

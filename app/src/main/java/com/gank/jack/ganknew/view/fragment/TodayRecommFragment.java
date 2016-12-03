@@ -132,7 +132,6 @@ public class TodayRecommFragment extends BaseFragment implements
 //                collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
 //                collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
                 startActivity(new Intent(getActivity(), SelectDateActivity.class));
-
                 break;
         }
     }

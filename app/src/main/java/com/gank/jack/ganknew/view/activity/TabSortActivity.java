@@ -5,7 +5,7 @@ import com.gank.jack.ganknew.presenter.TabSortPersenter;
 import com.gank.jack.ganknew.utils.SPUtils;
 import com.gank.jack.ganknew.utils.widget.DividerItemDecoration;
 import com.gank.jack.ganknew.utils.widget.SimpleItemTouchHelperCallback;
-import com.gank.jack.ganknew.interfaces.onStartDragListener;
+import com.gank.jack.ganknew.interfaces.OnStartDragListener;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +32,7 @@ import butterknife.Bind;
  */
 
 public class TabSortActivity extends BaseActivity implements
-        onStartDragListener,View.OnClickListener,SortTabIntetface {
+        OnStartDragListener,View.OnClickListener,SortTabIntetface {
 
     @Bind(R.id.sortToolbar)
     public Toolbar toolbar;

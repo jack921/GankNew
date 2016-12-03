@@ -1,7 +1,7 @@
 package com.gank.jack.ganknew.adapter;
 
-import com.gank.jack.ganknew.interfaces.onMoveAndSortListener;
-import com.gank.jack.ganknew.interfaces.onStartDragListener;
+import com.gank.jack.ganknew.interfaces.OnMoveAndSortListener;
+import com.gank.jack.ganknew.interfaces.OnStartDragListener;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,16 +22,16 @@ import java.util.List;
  */
 
 public class SortAdapter extends RecyclerView.Adapter
-        <RecyclerView.ViewHolder> implements onMoveAndSortListener {
+        <RecyclerView.ViewHolder> implements OnMoveAndSortListener {
 
     private Context context;
     private List<Sort> listSort;
-    public onStartDragListener dragListener;
+    public OnStartDragListener dragListener;
     public RecyclerView recyclerView;
     boolean deleteMore=false;
     boolean deleteClassify=false;
 
-    public SortAdapter(Context context, List<Sort> listSort,onStartDragListener listener){
+    public SortAdapter(Context context, List<Sort> listSort,OnStartDragListener listener){
         this.context=context;
         this.listSort=listSort;
         this.dragListener = listener;
