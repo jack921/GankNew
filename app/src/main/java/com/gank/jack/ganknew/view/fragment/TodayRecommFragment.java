@@ -26,6 +26,7 @@ import com.gank.jack.ganknew.presenter.TodayRecommPresenter;
 import com.gank.jack.ganknew.theme.Theme;
 import com.gank.jack.ganknew.utils.ImageLoad;
 import com.gank.jack.ganknew.utils.PreUtils;
+import com.gank.jack.ganknew.view.activity.SelectDateActivity;
 import com.gank.jack.ganknew.view.activity.WebContentActivity;
 import java.util.List;
 import butterknife.Bind;
@@ -130,7 +131,7 @@ public class TodayRecommFragment extends BaseFragment implements
 //                PreUtils.changeColorImpl(getActivity(),getActivity().getTheme());
 //                collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
 //                collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
-
+                startActivity(new Intent(getActivity(), SelectDateActivity.class));
 
                 break;
         }

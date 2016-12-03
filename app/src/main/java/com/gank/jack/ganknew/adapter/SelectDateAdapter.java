@@ -41,9 +41,8 @@ public class SelectDateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     class DateItemView extends RecyclerView.ViewHolder{
-
         @Bind(R.id.selectitem_date)
-        private TextView selectitem_date;
+        public TextView selectitem_date;
 
         public DateItemView(View itemView) {
             super(itemView);

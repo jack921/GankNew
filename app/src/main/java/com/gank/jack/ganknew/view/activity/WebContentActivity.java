@@ -47,21 +47,10 @@ public class WebContentActivity extends BaseActivity
         setContentView(R.layout.activity_webcontent);
         ButterKnife.bind(this);
         webContentPresenter=new WebContentPresenter(this);
-
         initWebView();
-        initToolbar();
+        setBaseSupportActionBar(webToolbar);
     }
 
-    public void initToolbar(){
-        setSupportActionBar(webToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        webToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
 
     public void initWebView(){
         gank=(Gank)getIntent().getSerializableExtra("gank");

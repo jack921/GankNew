@@ -56,16 +56,8 @@ public class TabSortActivity extends BaseActivity implements
     }
 
     public void init(){
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        setBaseSupportActionBar(toolbar);
         sortFinishButton.setOnClickListener(this);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         sortRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         sortRecyclerView.addItemDecoration(new DividerItemDecoration(
                 this,DividerItemDecoration.VERTICAL_LIST));
