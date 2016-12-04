@@ -51,16 +51,16 @@
             android:layout_marginBottom="15dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.nightonke.boommenu.BoomMenuButton
             android:id="@+id/today_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="50dp"
-            android:background="?attr/menuBackground"
-            app:srcCompat="@drawable/icon_date"
-            app:fabSize="normal"
+            app:boom_inActionBar="false"
+            app:boom_button_color="?attr/colorPrimary"
+            app:boom_button_pressed_color="?attr/colorPrimary"
             app:layout_behavior="com.gank.jack.ganknew.utils.widget.FloatingActionButtonBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

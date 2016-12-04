@@ -1,12 +1,10 @@
 package com.gank.jack.ganknew.view.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,15 +17,18 @@ import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.TodayRecommAdapter;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.base.BaseFragment;
+import com.gank.jack.ganknew.bean.DateResult;
 import com.gank.jack.ganknew.bean.Gank;
+import com.gank.jack.ganknew.bean.SelectDate;
 import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.interfaces.TodayRecommInterface;
 import com.gank.jack.ganknew.presenter.TodayRecommPresenter;
-import com.gank.jack.ganknew.theme.Theme;
-import com.gank.jack.ganknew.utils.ImageLoad;
-import com.gank.jack.ganknew.utils.PreUtils;
-import com.gank.jack.ganknew.view.activity.SelectDateActivity;
 import com.gank.jack.ganknew.view.activity.WebContentActivity;
+import com.nightonke.boommenu.BoomMenuButton;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,10 +41,8 @@ import butterknife.OnClick;
 public class TodayRecommFragment extends BaseFragment implements
         AppBarLayout.OnOffsetChangedListener,
         SwipeRefreshLayout.OnRefreshListener,
-        TodayRecommInterface, OnClickLintener {
+        TodayRecommInterface, OnClickLintener{
 
-//    @Bind(R.id.today_fab)
-//    public FloatingActionButton todayFab;
     @Bind(R.id.tool_bar)
     public Toolbar toolbar;
     @Bind(R.id.collapsing_toolbar)
@@ -56,18 +55,27 @@ public class TodayRecommFragment extends BaseFragment implements
     public RecyclerView todayRecyclerview;
     @Bind(R.id.todayGankImage)
     public ImageView todayGankImage;
+    @Bind(R.id.today_fab)
+    public BoomMenuButton boomMenuButton;
 
     public TodayRecommPresenter todayRecommPresenter;
     public TodayRecommAdapter todayRecommAdapter;
     public  List<Gank> listGank=null;
+    public DateResult dateResult;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_recomment,container,false);
+        EventBus.getDefault().register(this);
         ButterKnife.bind(this,view);
         initView();
+        initBoomMenuButton();
         return view;
+    }
+
+    public void initBoomMenuButton(){
+        todayRecommPresenter.initBoomMenu(getActivity(),boomMenuButton);
     }
 
     public void initView(){
@@ -76,7 +84,9 @@ public class TodayRecommFragment extends BaseFragment implements
         todayRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         todaySwipeRefreshLayout.setOnRefreshListener(this);
         todayRecommPresenter=new TodayRecommPresenter(getActivity());
-        todayRecommPresenter.getTodayRecommData(this,"2016","11","07");
+        dateResult=todayRecommPresenter.getTodayRecomm();
+        todayRecommPresenter.getTodayRecommData(this,dateResult.year,dateResult.month,dateResult.day);
+        listGank=new ArrayList<>();
     }
 
     @Override
@@ -90,23 +100,28 @@ public class TodayRecommFragment extends BaseFragment implements
 
     @Override
     public void onRefresh() {
-        todayRecommPresenter.getTodayRecommData(this,"2016","11","09");
+        todayRecommPresenter.getTodayRecommData(this,dateResult.year,dateResult.month,dateResult.day);
     }
 
     @Override
     public void getToadyRecomm(List<Gank> listGanks){
-        if(listGanks==null) return ;
-        if(listGank!=null) listGank.clear();
-
-        this.listGank=listGanks;
-        if(listGank.get(listGank.size()-1).type.equals("福利")){
-            ImageLoad.displayImage(listGank.get(listGank.size()-1).url,todayGankImage);
+        initBoomMenuButton();
+        if(todayRecommPresenter.initData(this,this.listGank,listGanks,
+               todayRecommPresenter,todayGankImage,collapsingToolbarLayout,dateResult)){
+           return;
         }
-        todayRecommPresenter.addHeadItem(this.listGank);
+        this.listGank=todayRecommPresenter.addHeadItem(this.listGank);
         todayRecommAdapter=new TodayRecommAdapter(getActivity(),this.listGank);
         todayRecommAdapter.setOnClickLintener(this);
         todayRecyclerview.setAdapter(todayRecommAdapter);
         todaySwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void getSelectDate(SelectDate selectDate) {
+        dateResult=todayRecommPresenter.formatStringDate(selectDate.results.get(0));
+        todayRecommPresenter.getTodayRecommData(this,
+                dateResult.year,dateResult.month,dateResult.day);
     }
 
     //网络出错等情况时
@@ -131,9 +146,22 @@ public class TodayRecommFragment extends BaseFragment implements
 //                PreUtils.changeColorImpl(getActivity(),getActivity().getTheme());
 //                collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
 //                collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
-                startActivity(new Intent(getActivity(), SelectDateActivity.class));
+//                startActivity(new Intent(getActivity(), SelectDateActivity.class));
                 break;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void UpdateTodayData(DateResult dateResult){
+        if(dateResult.day!=null){
+            todayRecommPresenter.getTodayRecommData(this,dateResult.year,dateResult.month,dateResult.day);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
 }

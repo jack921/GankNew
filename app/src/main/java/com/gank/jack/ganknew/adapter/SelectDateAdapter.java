@@ -8,10 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.interfaces.OnClickLintener;
-
 import java.util.List;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Jack on 2016/11/30.

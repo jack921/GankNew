@@ -2,8 +2,11 @@ package com.gank.jack.ganknew.presenter;
 
 import android.content.Context;
 
+import com.gank.jack.ganknew.bean.DateResult;
 import com.gank.jack.ganknew.bean.SelectDate;
 import com.gank.jack.ganknew.interfaces.SelectDateInterface;
+
+import java.util.Date;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -35,6 +38,15 @@ public class SelectDatePersenter extends BasePresenter{
                         selectDateInterface.getSelectDate(selectDate);
                     }
                 });
+    }
+
+    public DateResult formatStringDate(String date){
+        int firstIndex=date.indexOf("-");
+        int lastIndex=date.lastIndexOf("-");
+        String year=date.substring(0,firstIndex);
+        String month=date.substring(firstIndex+1,lastIndex);
+        String day=date.substring(lastIndex+1,date.length());
+        return new DateResult(year,month,day);
     }
 
 

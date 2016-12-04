@@ -11,10 +11,12 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.base.BaseActivity;
+import com.gank.jack.ganknew.bean.DateResult;
 import com.gank.jack.ganknew.view.fragment.AllClassifyFragment;
 import com.gank.jack.ganknew.view.fragment.FemaleWelfareFragment;
 import com.gank.jack.ganknew.view.fragment.MyCollectFragment;
 import com.gank.jack.ganknew.view.fragment.TodayRecommFragment;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

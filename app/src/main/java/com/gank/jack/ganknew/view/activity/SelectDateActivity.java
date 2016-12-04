@@ -6,15 +6,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.SelectDateAdapter;
 import com.gank.jack.ganknew.base.BaseActivity;
+import com.gank.jack.ganknew.bean.DateResult;
 import com.gank.jack.ganknew.bean.SelectDate;
 import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.interfaces.SelectDateInterface;
 import com.gank.jack.ganknew.presenter.SelectDatePersenter;
 import com.gank.jack.ganknew.utils.widget.DividerItemDecoration;
+
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -73,6 +76,9 @@ public class SelectDateActivity extends BaseActivity implements SelectDateInterf
     @Override
     public void onClick(View v, int position) {
         showSnackbar(selectDate.results.get(position));
+        DateResult dateResult= selectDatePersenter.formatStringDate(selectDate.results.get(position));
+        EventBus.getDefault().post(dateResult);
+        finish();
     }
 
 }
