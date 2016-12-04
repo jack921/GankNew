@@ -138,18 +138,11 @@ public class TodayRecommFragment extends BaseFragment implements
         startNewActivityByIntent(intent);
     }
 
-    @OnClick(R.id.today_fab)
-    public void viewOnClick(View v){
-        switch(v.getId()){
-            case R.id.today_fab:
-//                PreUtils.changeTheme(getActivity(),R.style.BlueTheme, Theme.Blue.toString());
-//                PreUtils.changeColorImpl(getActivity(),getActivity().getTheme());
-//                collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
-//                collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
-//                startActivity(new Intent(getActivity(), SelectDateActivity.class));
-                break;
-        }
-    }
+//  PreUtils.changeTheme(getActivity(),R.style.BlueTheme, Theme.Blue.toString());
+//  PreUtils.changeColorImpl(getActivity(),getActivity().getTheme());
+//  collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
+//  collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
+//  startActivity(new Intent(getActivity(), SelectDateActivity.class));
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void UpdateTodayData(DateResult dateResult){

@@ -1,0 +1,5 @@
+<root>
+  <item name='java.lang.Enum java.lang.String toString()'>
+    <annotation name='java.lang.annotation.Deprecated' />
+  </item>
+</root>
