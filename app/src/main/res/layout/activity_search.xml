@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll"
+            app:layout_scrollFlags="enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:weightSum="1">
 
@@ -60,13 +60,14 @@
                         android:imeOptions="actionSearch"
                         android:layout_marginTop="2dp"
                         android:saveEnabled="false"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:singleLine="true"
                         android:textColorHint="@color/white"
                         android:hint="@string/inputsearch"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <ImageView
+                    android:id="@+id/cancel_img"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"

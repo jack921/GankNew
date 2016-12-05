@@ -3,6 +3,7 @@ package com.gank.jack.ganknew.api;
 
 import com.gank.jack.ganknew.bean.GankModel;
 import com.gank.jack.ganknew.bean.ImageType;
+import com.gank.jack.ganknew.bean.SearchGank;
 import com.gank.jack.ganknew.bean.SelectDate;
 import com.gank.jack.ganknew.bean.TodayGank;
 
@@ -41,8 +42,8 @@ public interface GankApi {
 
     //搜索 API搜索 API
     @GET("search/query/{content}/category/all/count/{num}/page/{page}")
-    Observable<GankModel> getSearchData(@Path("content") String context,
-            @Path("num") String num,@Path("page") String page);
+    Observable<SearchGank> getSearchData(@Path("content") String context,
+             @Path("num") String num, @Path("page") String page);
 
     //提交干货到审核区
     @Multipart
