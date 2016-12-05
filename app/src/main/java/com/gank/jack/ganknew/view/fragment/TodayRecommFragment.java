@@ -23,6 +23,9 @@ import com.gank.jack.ganknew.bean.SelectDate;
 import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.interfaces.TodayRecommInterface;
 import com.gank.jack.ganknew.presenter.TodayRecommPresenter;
+import com.gank.jack.ganknew.utils.ToastUtil;
+import com.gank.jack.ganknew.view.activity.SearchActivity;
+import com.gank.jack.ganknew.view.activity.SelectDateActivity;
 import com.gank.jack.ganknew.view.activity.WebContentActivity;
 import com.nightonke.boommenu.BoomMenuButton;
 import org.greenrobot.eventbus.EventBus;
@@ -41,7 +44,8 @@ import butterknife.OnClick;
 public class TodayRecommFragment extends BaseFragment implements
         AppBarLayout.OnOffsetChangedListener,
         SwipeRefreshLayout.OnRefreshListener,
-        TodayRecommInterface, OnClickLintener{
+        TodayRecommInterface, OnClickLintener,
+        BoomMenuButton.OnSubButtonClickListener {
 
     @Bind(R.id.tool_bar)
     public Toolbar toolbar;
@@ -75,7 +79,7 @@ public class TodayRecommFragment extends BaseFragment implements
     }
 
     public void initBoomMenuButton(){
-        todayRecommPresenter.initBoomMenu(getActivity(),boomMenuButton);
+        todayRecommPresenter.initBoomMenu(this,boomMenuButton);
     }
 
     public void initView(){
@@ -142,7 +146,6 @@ public class TodayRecommFragment extends BaseFragment implements
 //  PreUtils.changeColorImpl(getActivity(),getActivity().getTheme());
 //  collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
 //  collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
-//  startActivity(new Intent(getActivity(), SelectDateActivity.class));
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void UpdateTodayData(DateResult dateResult){
@@ -155,6 +158,16 @@ public class TodayRecommFragment extends BaseFragment implements
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onClick(int buttonIndex){
+        if(buttonIndex==0){
+            startActivity(new Intent(getActivity(), SelectDateActivity.class));
+        }else if(buttonIndex==1){
+        }else{
+            startActivity(new Intent(getActivity(),SearchActivity.class));
+        }
     }
 
 }

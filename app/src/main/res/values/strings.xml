@@ -30,5 +30,6 @@
     <string name="mycollect">我的收藏</string>
     <string name="no_collect_tip">没有收藏哦</string>
     <string name="choosedate">选择日期</string>
+    <string name="inputsearch">输入查找内容...</string>
 
 </resources>

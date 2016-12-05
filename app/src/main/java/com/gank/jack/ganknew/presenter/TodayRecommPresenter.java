@@ -164,14 +164,14 @@ public class TodayRecommPresenter extends BasePresenter{
         return new DateResult(year,month,day);
     }
 
-    public void initBoomMenu(Context context,BoomMenuButton boomMenuButton){
+    public void initBoomMenu(TodayRecommFragment todayRecommFragment,BoomMenuButton boomMenuButton){
         Drawable[] drawables = new Drawable[3];
         int[][] colors = new int[3][2];
         String[] string=new String[]{"日期","发布","查找"};
         int[] drawablesResource = new int[]{
-                R.drawable.refresh,
-                R.drawable.refresh,
-                R.drawable.refresh
+                R.drawable.icon_date,
+                R.drawable.icon_send,
+                R.drawable.icon_search
         };
         for (int i = 0; i < 3; i++)
             drawables[i] = ContextCompat.getDrawable(context, drawablesResource[i]);
@@ -184,7 +184,8 @@ public class TodayRecommPresenter extends BasePresenter{
                 .button(ButtonType.CIRCLE)
                 .boom(BoomType.HORIZONTAL_THROW_2)
                 .place(PlaceType.CIRCLE_3_1)
-                .boomButtonShadow(Util.getInstance().dp2px(2), Util.getInstance().dp2px(2))
+                .boomButtonShadow(Util.getInstance().dp2px(10),Util.getInstance().dp2px(10))
+                .onSubButtonClick(todayRecommFragment)
                 .init(boomMenuButton);
     }
 
