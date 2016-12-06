@@ -20,137 +20,139 @@
             android:weightSum="1"/>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_alignParentBottom="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="30dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_url"
                     android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp">
-                    <ImageView
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        android:src="@drawable/icon_url"
-                        android:layout_marginRight="20dp"
-                        android:layout_gravity="center_vertical"/>
-
-                    <android.support.design.widget.TextInputLayout
+                    android:layout_gravity="center_vertical"/>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/commit_url"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <EditText
-                            android:id="@+id/commit_url"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textSize="18sp"
-                            android:singleLine="true"
-                            android:textColorHint="@color/white"
-                            android:hint="@string/commit_url"
-                            android:layout_marginBottom="3dp" />
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp">
-
-                    <ImageView
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        android:src="@drawable/icon_describe"
-                        android:layout_marginRight="20dp"
-                        android:layout_gravity="center_vertical"/>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <EditText
-                            android:id="@+id/commit_content"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textSize="18sp"
-                            android:singleLine="true"
-                            android:textColorHint="@color/white"
-                            android:hint="@string/commit_content"
-                            android:layout_marginBottom="3dp"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp">
-                    <ImageView
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        android:src="@drawable/icon_commiter"
-                        android:layout_marginRight="20dp"
-                        android:layout_gravity="center_vertical"/>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <EditText
-                            android:id="@+id/commit_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textSize="18sp"
-                            android:singleLine="true"
-                            android:textColorHint="@color/white"
-                            android:hint="@string/commit_id"
-                            android:layout_marginBottom="3dp"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp">
-                    <ImageView
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        android:src="@drawable/icon_type"
-                        android:layout_marginRight="20dp"
-                        android:layout_gravity="center_vertical"/>
-
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/publishSpinner"
-                        android:layout_width="130dp"
                         android:layout_height="match_parent"
-                        android:spinnerMode="dialog">
-                    </android.support.v7.widget.AppCompatSpinner>
-
-                </LinearLayout>
-
+                        android:textSize="18sp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/white"
+                        android:hint="@string/commit_url"
+                        android:layout_marginBottom="3dp" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_describe"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="center_vertical"/>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/commit_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="18sp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/white"
+                        android:hint="@string/commit_content"
+                        android:layout_marginBottom="3dp"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_commiter"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="center_vertical"/>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/commit_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="18sp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/white"
+                        android:hint="@string/commit_id"
+                        android:layout_marginBottom="3dp"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_type"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="center_vertical"/>
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/publishSpinner"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dialog">
+                </android.support.v7.widget.AppCompatSpinner>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/publicshfinish"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            app:fabSize="normal"
+            app:elevation="5dp"
+            app:pressedTranslationZ="5dp"
+            app:borderWidth="0dp"
+            app:srcCompat="@drawable/icon_duihao" />
+
+    </RelativeLayout>
 
 
-        </RelativeLayout>
 
-    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

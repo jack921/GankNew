@@ -3,6 +3,7 @@ package com.gank.jack.ganknew.api;
 
 import com.gank.jack.ganknew.bean.GankModel;
 import com.gank.jack.ganknew.bean.ImageType;
+import com.gank.jack.ganknew.bean.PublishResult;
 import com.gank.jack.ganknew.bean.SearchGank;
 import com.gank.jack.ganknew.bean.SelectDate;
 import com.gank.jack.ganknew.bean.TodayGank;
@@ -50,8 +51,8 @@ public interface GankApi {
     //提交干货到审核区
     @FormUrlEncoded
     @POST("add2gank")
-    Observable<GankModel> commitToGank(@Field("url") String url,@Field("desc") String desc
-            ,@Field("who") String who,@Field("type") String type,@Field("debug") String debug);
+    Observable<PublishResult> commitToGank(@Field("url") String url, @Field("desc") String desc
+            , @Field("who") String who, @Field("type") String type, @Field("debug") String debug);
 
     @GET
     Observable<ImageType> GankImageInfo(@Url String url);
