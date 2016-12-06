@@ -1,7 +1,6 @@
 package com.gank.jack.ganknew.view.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +16,7 @@ import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.SearchAdapter;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.bean.Search;
+import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.interfaces.RefreshInterface;
 import com.gank.jack.ganknew.interfaces.SearchInterface;
 import com.gank.jack.ganknew.presenter.SearchPersenter;
@@ -31,7 +31,7 @@ import butterknife.OnClick;
  */
 
 public class SearchActivity extends BaseActivity
-        implements TextView.OnEditorActionListener,SearchInterface, RefreshInterface {
+        implements TextView.OnEditorActionListener,SearchInterface, RefreshInterface, OnClickLintener {
 
     @Bind(R.id.search_toolbar)
     public Toolbar searchToolbar;
@@ -66,6 +66,7 @@ public class SearchActivity extends BaseActivity
         searchRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         searchAdapter=new SearchAdapter(this,myListSearch);
         searchAdapter.setRefreshInterface(this);
+        searchAdapter.setOnClickLintener(this);
         searchRecyclerview.setAdapter(searchAdapter);
     }
 
@@ -91,6 +92,11 @@ public class SearchActivity extends BaseActivity
                 page=1;
                 break;
         }
+    }
+
+    @Override
+    public void onClick(View v,int position){
+        searchPersenter.turnToWebContent(this,myListSearch.get(position));
     }
 
     @Override

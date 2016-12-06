@@ -24,6 +24,7 @@ import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.interfaces.TodayRecommInterface;
 import com.gank.jack.ganknew.presenter.TodayRecommPresenter;
 import com.gank.jack.ganknew.utils.ToastUtil;
+import com.gank.jack.ganknew.view.activity.PublishActivity;
 import com.gank.jack.ganknew.view.activity.SearchActivity;
 import com.gank.jack.ganknew.view.activity.SelectDateActivity;
 import com.gank.jack.ganknew.view.activity.WebContentActivity;
@@ -165,6 +166,7 @@ public class TodayRecommFragment extends BaseFragment implements
         if(buttonIndex==0){
             startActivity(new Intent(getActivity(), SelectDateActivity.class));
         }else if(buttonIndex==1){
+            startActivity(new Intent(getActivity(), PublishActivity.class));
         }else{
             startActivity(new Intent(getActivity(),SearchActivity.class));
         }

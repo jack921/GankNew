@@ -7,6 +7,8 @@ import com.gank.jack.ganknew.bean.SearchGank;
 import com.gank.jack.ganknew.bean.SelectDate;
 import com.gank.jack.ganknew.bean.TodayGank;
 
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -46,10 +48,10 @@ public interface GankApi {
              @Path("num") String num, @Path("page") String page);
 
     //提交干货到审核区
-    @Multipart
+    @FormUrlEncoded
     @POST("add2gank")
-    Observable<GankModel> commitToGank(@Part("url") String url,@Path("desc") String desc
-            ,@Part("who") String who,@Part("type") String type,@Part("debug") String debug);
+    Observable<GankModel> commitToGank(@Field("url") String url,@Field("desc") String desc
+            ,@Field("who") String who,@Field("type") String type,@Field("debug") String debug);
 
     @GET
     Observable<ImageType> GankImageInfo(@Url String url);

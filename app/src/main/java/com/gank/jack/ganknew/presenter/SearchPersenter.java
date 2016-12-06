@@ -1,16 +1,19 @@
 package com.gank.jack.ganknew.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.gank.jack.ganknew.adapter.SearchAdapter;
 import com.gank.jack.ganknew.api.GankApi;
+import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.bean.GankModel;
 import com.gank.jack.ganknew.bean.Search;
 import com.gank.jack.ganknew.bean.SearchGank;
 import com.gank.jack.ganknew.interfaces.SearchInterface;
+import com.gank.jack.ganknew.view.activity.WebContentActivity;
 
 import java.util.List;
 
@@ -64,6 +67,20 @@ public class SearchPersenter extends BasePresenter{
         listSearch.clear();
         adapter.notifyDataSetChanged();
         searchEditText.setText("");
+    }
+
+    public void turnToWebContent(Context context,Search search){
+        Gank gank=new Gank();
+        gank.who=search.who;
+        gank.desc=search.desc;
+        gank.url=search.url;
+        gank.type=search.type;
+        gank.publishedAt=search.publishedAt;
+        gank._id=search.ganhuo_id;
+        Intent intent=new Intent(context,WebContentActivity.class);
+        intent.putExtra("collectTag",false);
+        intent.putExtra("gank",gank);
+        context.startActivity(intent);
     }
 
 }

@@ -26,6 +26,7 @@
         <activity android:name=".view.activity.SelectDateActivity"></activity>
         <activity android:name=".view.activity.SearchActivity"
                   android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".view.activity.PublishActivity"></activity>
 
     </application>
 
