@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.bean.Gank;
+import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.utils.ImageLoad;
 import com.gank.jack.ganknew.utils.ScreenUtils;
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ public class WelfareAdapter extends BaseRecyclerViewAdapter<Gank>{
     private List<Gank> listGank;
     private List<Integer> listHeight;
     private Context context;
+    private OnClickLintener onClickLintener;
+
+    public void setOnClickLintener(OnClickLintener onClickLintener) {
+        this.onClickLintener = onClickLintener;
+    }
 
     public WelfareAdapter(Context context, List<Gank> ListData) {
         super(context, ListData);
@@ -59,6 +65,14 @@ public class WelfareAdapter extends BaseRecyclerViewAdapter<Gank>{
             super(itemView);
             welfareItem=(ImageView)itemView.findViewById(R.id.welfare_item);
             welfareDate=(TextView)itemView.findViewById(R.id.welfare_date);
+            if(onClickLintener!=null){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onClickLintener.onClick(welfareItem,getAdapterPosition());
+                    }
+                });
+            }
         }
         public void bindView(Gank gank,int position){
             welfareDate.setText(gank.desc);

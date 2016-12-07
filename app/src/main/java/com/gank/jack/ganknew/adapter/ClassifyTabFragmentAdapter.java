@@ -11,9 +11,9 @@ import java.util.List;
 
 public class ClassifyTabFragmentAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> mFragments;
-    private String[] mTitles;
+    private List<String> mTitles;
 
-    public ClassifyTabFragmentAdapter(FragmentManager fm, List<Fragment> fragments, String[] titles) {
+    public ClassifyTabFragmentAdapter(FragmentManager fm, List<Fragment> fragments,List<String> titles) {
         super(fm);
         mFragments = fragments;
         mTitles = titles;
@@ -31,7 +31,7 @@ public class ClassifyTabFragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTitles[position];
+        return mTitles.get(position);
     }
 
 }

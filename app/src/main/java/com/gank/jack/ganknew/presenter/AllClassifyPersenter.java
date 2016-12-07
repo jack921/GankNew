@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 类名称：AllClassifyPersenter.java <br>
  * @author 谢汉杰
  */
 
@@ -29,9 +28,11 @@ public class AllClassifyPersenter extends BasePresenter{
     public void initAllTabData(AllClassifyInterface allClassifyInterface, String tabData,
                                TabLayout tabLayout, List<Fragment> listFragment){
         List<Sort> tempListSort=new Gson().fromJson(tabData,new TypeToken<List<Sort>>(){}.getType());
+        List<String> listTitle=new ArrayList<>();
         for(int i=0;i<tempListSort.size();i++){
             if(tempListSort.get(i).normal==true&&tempListSort.get(i).choose==true){
                 tabLayout.addTab(tabLayout.newTab().setText(tempListSort.get(i).title));
+                listTitle.add(tempListSort.get(i).title);
                 Bundle bundle=new Bundle();
                 bundle.putString("TabTitle",tempListSort.get(i).title);
                 ClassifyTabFragment classifyTabFragment=new ClassifyTabFragment();
@@ -39,14 +40,14 @@ public class AllClassifyPersenter extends BasePresenter{
                 listFragment.add(classifyTabFragment);
             }
         }
-        allClassifyInterface.initViewData(tabLayout,listFragment);
+        allClassifyInterface.initViewData(tabLayout,listFragment,listTitle);
     }
 
     //没有数据的时候初始化
     public void initNotAllTabData(AllClassifyInterface allClassifyInterface,
              TabLayout tabLayout, List<Fragment> listFragment){
         List<Sort> listSort=new ArrayList<>();
-
+        List<String> listTitle=new ArrayList<>();
         listSort.add(new Sort("",true,false,false,false));
         for(int i=0;i<2;i++){
             listSort.add(new Sort(Config.Aategory[i],false,false,true,true));
@@ -60,6 +61,7 @@ public class AllClassifyPersenter extends BasePresenter{
         for(int i=0;i<listSort.size();i++){
             if(listSort.get(i).normal==true&&listSort.get(i).choose==true){
                 tabLayout.addTab(tabLayout.newTab().setText(listSort.get(i).title));
+                listTitle.add(listSort.get(i).title);
                 Bundle bundle=new Bundle();
                 bundle.putString("TabTitle",listSort.get(i).title);
                 ClassifyTabFragment classifyTabFragment=new ClassifyTabFragment();
@@ -67,7 +69,7 @@ public class AllClassifyPersenter extends BasePresenter{
                 listFragment.add(classifyTabFragment);
             }
         }
-        allClassifyInterface.initViewData(tabLayout,listFragment);
+        allClassifyInterface.initViewData(tabLayout,listFragment,listTitle);
     }
 
     public void updatTabClassify(AllClassifyInterface allClassifyInterface,List<Sort> listSort,
@@ -75,9 +77,11 @@ public class AllClassifyPersenter extends BasePresenter{
         try{
             tabLayout.removeAllTabs();
             listFragment.clear();
+            List<String> listTitle=new ArrayList<>();
             for(int i=0;i<listSort.size();i++){
                 if(listSort.get(i).normal==true&&listSort.get(i).choose==true){
                     tabLayout.addTab(tabLayout.newTab().setText(listSort.get(i).title));
+                    listTitle.add(listSort.get(i).title);
                     Bundle bundle=new Bundle();
                     bundle.putString("TabTitle",listSort.get(i).title);
                     ClassifyTabFragment classifyTabFragment=new ClassifyTabFragment();
@@ -85,9 +89,8 @@ public class AllClassifyPersenter extends BasePresenter{
                     listFragment.add(classifyTabFragment);
                 }
             }
-            allClassifyInterface.updateTabClassify(true);
+            allClassifyInterface.initViewData(tabLayout,listFragment,listTitle);
         }catch(Exception e){
-            allClassifyInterface.updateTabClassify(false);
         }
     }
 

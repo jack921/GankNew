@@ -83,19 +83,11 @@ public class AllClassifyFragment extends BaseFragment
     }
 
     @Override
-    public void initViewData(TabLayout tabLayout, List<Fragment> listFragment) {
+    public void initViewData(TabLayout tabLayout, List<Fragment> listFragment,List<String> listTitle) {
         adapter = new ClassifyTabFragmentAdapter(getActivity()
-                .getSupportFragmentManager(),listFragment,tabTitle);
+                .getSupportFragmentManager(),listFragment,listTitle);
         viewpager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewpager);
-    }
-
-    @Override
-    public void updateTabClassify(boolean result) {
-        if(result==true){
-            adapter.notifyDataSetChanged();
-            tabLayout.setupWithViewPager(viewpager);
-        }
     }
 
     @Override

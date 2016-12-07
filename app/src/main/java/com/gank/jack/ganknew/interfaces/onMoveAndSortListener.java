@@ -8,5 +8,5 @@ import android.support.v7.widget.RecyclerView;
 
 public interface OnMoveAndSortListener {
     boolean onItemMove(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target
-            ,int fromPosition , int toPosition);
+            ,int fromPosition , int toPosition,boolean choose);
 }

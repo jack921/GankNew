@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.content.Context;
 import android.widget.TextView;
 import com.gank.jack.ganknew.R;
+import com.gank.jack.ganknew.utils.LogUtil;
 import java.util.List;
 
 /**
@@ -80,11 +81,14 @@ public class SortAdapter extends RecyclerView.Adapter
 
     @Override
     public boolean onItemMove(RecyclerView.ViewHolder viewHolder,
-              RecyclerView.ViewHolder target, int fromPosition, final int toPosition){
+              RecyclerView.ViewHolder target, int fromPosition, final int toPosition,boolean choose){
         Sort item = listSort.get(fromPosition);
         listSort.remove(fromPosition);
         listSort.add(toPosition ,item);
         notifyItemMoved(fromPosition,toPosition);
+        LogUtil.e("simpleTest31",listSort.get(toPosition).choose+"");
+        listSort.get(toPosition).choose=choose;
+        LogUtil.e("simpleTest32",listSort.get(toPosition).choose+"");
         return true;
     }
 

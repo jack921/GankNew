@@ -1,5 +1,6 @@
 package com.gank.jack.ganknew.presenter;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 
 import com.gank.jack.ganknew.bean.GankModel;
@@ -40,6 +41,13 @@ public class WelfarePresenter extends BasePresenter{
                         welfaceInterface.getWelfaceData(gankModel.results,isLast);
                     }
                 });
+    }
+
+    public void welfareToPhoto(){
+
+//        startActivity(intent, ActivityOptions.
+//                makeSceneTransitionAnimation(ActivityOne.this, share, "shareTransition").toBundle());
+
     }
 
 }

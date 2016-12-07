@@ -2,10 +2,12 @@ package com.gank.jack.ganknew.utils.widget;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 
 import com.gank.jack.ganknew.adapter.SortAdapter;
 import com.gank.jack.ganknew.bean.Sort;
 import com.gank.jack.ganknew.interfaces.OnMoveAndSortListener;
+import com.gank.jack.ganknew.utils.LogUtil;
 
 import java.util.List;
 
@@ -40,24 +42,30 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
         if(target.getItemViewType()==1||target.getItemViewType()==2){
             return false;
         }
+        boolean choose = false;
         if(target.getItemViewType()!=2){
             if(((SortAdapter.SortItemView)viewHolder).sortCheck.isChecked()!=
                     ((SortAdapter.SortItemView)target).sortCheck.isChecked()){
-
+                Log.e("simpleTest11",listSort.get(viewHolder.getAdapterPosition()).choose+"");
                 listSort.get(viewHolder.getAdapterPosition()).choose=
                         !((SortAdapter.SortItemView)viewHolder).sortCheck.isChecked();
-
+                choose=listSort.get(viewHolder.getAdapterPosition()).choose;
+                Log.e("simpleTest12",choose+"");
                 ((SortAdapter.SortItemView)viewHolder).sortCheck
                         .setChecked(((SortAdapter.SortItemView)target).sortCheck.isChecked());
-
             }
         }else{
+            Log.e("simpleTest21",listSort.get(viewHolder.getAdapterPosition()).choose+"");
             listSort.get(viewHolder.getAdapterPosition()).choose=
                     !((SortAdapter.SortItemView)viewHolder).sortCheck.isChecked();
+            choose=listSort.get(viewHolder.getAdapterPosition()).choose;
+            Log.e("simpleTest22",listSort.get(viewHolder.getAdapterPosition()).choose+"");
             ((SortAdapter.SortItemView)viewHolder).sortCheck
                     .setChecked(listSort.get(viewHolder.getAdapterPosition()).choose);
         }
-        mAdapter.onItemMove(viewHolder,target,viewHolder.getAdapterPosition(),target.getAdapterPosition());
+
+        LogUtil.e("simpleTest4",choose+"");
+        mAdapter.onItemMove(viewHolder,target,viewHolder.getAdapterPosition(),target.getAdapterPosition(),choose);
         return moveStatus;
     }
 
