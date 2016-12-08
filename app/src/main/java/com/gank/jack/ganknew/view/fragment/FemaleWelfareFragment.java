@@ -2,6 +2,7 @@ package com.gank.jack.ganknew.view.fragment;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.WelfareAdapter;
 import com.gank.jack.ganknew.base.BaseActivity;
@@ -108,17 +113,20 @@ public class FemaleWelfareFragment extends BaseFragment implements
     }
 
     @Override
-    public void onClick(View v, int position) {
-        Intent intent=new Intent(getActivity(), PhotoActivity.class);
-        intent.putExtra("gank",listGank.get(position));
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        ActivityOptionsCompat compat=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                (ImageView)v,getString(R.string.transitionAnimator));
-        ActivityCompat.startActivity(getActivity(),intent,compat.toBundle());
-//        }else{
-//            startActivity(intent);
-//        }
-
+    public void onClick(final View v, final int position) {
+        Glide.with(this).load(listGank.get(position).url)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        Intent intent=new Intent(getActivity(), PhotoActivity.class);
+                        intent.putExtra("gank",listGank.get(position));
+                        ActivityOptionsCompat compat=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                                (ImageView)v,getString(R.string.transitionAnimator));
+                        ActivityCompat.startActivity(getActivity(),intent,compat.toBundle());
+                    }
+                });
     }
 
 }
