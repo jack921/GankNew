@@ -33,7 +33,6 @@ public class PhotoActivity extends ToolbarBaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
         init();
         initView();
     }
@@ -57,8 +56,6 @@ public class PhotoActivity extends ToolbarBaseActivity {
         super.onDestroy();
         ButterKnife.unbind(this);
     }
-
-
 
 
 }
