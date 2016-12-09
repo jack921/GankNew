@@ -32,6 +32,7 @@ import com.gank.jack.ganknew.interfaces.WelfaceInterface;
 import com.gank.jack.ganknew.presenter.WelfarePresenter;
 import com.gank.jack.ganknew.view.activity.PhotoActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
@@ -121,7 +122,8 @@ public class FemaleWelfareFragment extends BaseFragment implements
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         Intent intent=new Intent(getActivity(), PhotoActivity.class);
-                        intent.putExtra("gank",listGank.get(position));
+                        intent.putExtra("listGank",(Serializable)listGank);
+                        intent.putExtra("position",position);
                         ActivityOptionsCompat compat=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
                                 (ImageView)v,getString(R.string.transitionAnimator));
                         ActivityCompat.startActivity(getActivity(),intent,compat.toBundle());

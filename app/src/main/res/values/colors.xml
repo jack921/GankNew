@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="photo_bg">#000000</color>
+
     <array name="colors">
         <item>@color/colorBluePrimary</item>
         <item>@color/colorRedPrimary</item>
