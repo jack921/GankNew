@@ -1,12 +1,9 @@
 package com.gank.jack.ganknew.view.fragment;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -25,16 +21,20 @@ import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.WelfareAdapter;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.base.BaseFragment;
+import com.gank.jack.ganknew.bean.FemaleCurrent;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.interfaces.RefreshInterface;
 import com.gank.jack.ganknew.interfaces.WelfaceInterface;
 import com.gank.jack.ganknew.presenter.WelfarePresenter;
 import com.gank.jack.ganknew.view.activity.PhotoActivity;
-
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -58,13 +58,17 @@ public class FemaleWelfareFragment extends BaseFragment implements
     public int page=1;
     private boolean isRefresh=false;
 
+    private int welfareCurrent=0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_welfare,container,false);
         ButterKnife.bind(this,view);
+        EventBus.getDefault().register(this);
         init();
+
         return view;
     }
 
@@ -115,20 +119,36 @@ public class FemaleWelfareFragment extends BaseFragment implements
 
     @Override
     public void onClick(final View v, final int position) {
-        Glide.with(this).load(listGank.get(position).url)
-                .asBitmap()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        Intent intent=new Intent(getActivity(), PhotoActivity.class);
-                        intent.putExtra("listGank",(Serializable)listGank);
-                        intent.putExtra("position",position);
-                        ActivityOptionsCompat compat=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                                (ImageView)v,getString(R.string.transitionAnimator));
-                        ActivityCompat.startActivity(getActivity(),intent,compat.toBundle());
-                    }
-                });
+        Glide.with(this).load(listGank.get(position).url).asBitmap()
+             .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+             .into(new SimpleTarget<Bitmap>() {
+                 @Override
+                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                     Intent intent=new Intent(getActivity(), PhotoActivity.class);
+                     intent.putExtra("listGank",(Serializable)listGank);
+                     intent.putExtra("position",position);
+                     ActivityOptionsCompat compat=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                                (ImageView)v,String.format("%s.image",listGank.get(position)._id));
+                     startActivity(intent,compat.toBundle());
+                 }
+             });
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updateCurrent(FemaleCurrent femaleCurrent){
+        welfareCurrent=femaleCurrent.current;
+    }
+
+    public void updateSharedElements(Map<String, View> sharedElements){
+        WelfareAdapter.WelfareView welfareView=(WelfareAdapter.WelfareView)
+                welfareRecyclerview.findViewHolderForLayoutPosition(welfareCurrent);
+        sharedElements.put(String.format("%s.image",listGank.get(welfareCurrent)._id),
+                welfareView.welfareItem);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

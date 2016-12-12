@@ -25,6 +25,7 @@ public class PhotoFragmentAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Bundle bundle=new Bundle();
         bundle.putString("url",listGank.get(position).url);
+        bundle.putString("id",listGank.get(position)._id);
         PhotoFragment photoFragment=new PhotoFragment();
         photoFragment.setArguments(bundle);
         return photoFragment;

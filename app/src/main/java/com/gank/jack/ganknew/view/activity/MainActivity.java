@@ -1,21 +1,29 @@
 package com.gank.jack.ganknew.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.SharedElementCallback;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.gank.jack.ganknew.R;
+import com.gank.jack.ganknew.adapter.WelfareAdapter;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.bean.DateResult;
 import com.gank.jack.ganknew.view.fragment.AllClassifyFragment;
 import com.gank.jack.ganknew.view.fragment.FemaleWelfareFragment;
 import com.gank.jack.ganknew.view.fragment.MyCollectFragment;
 import com.gank.jack.ganknew.view.fragment.TodayRecommFragment;
+
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +38,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private MyCollectFragment myCollectFragment;
     private TodayRecommFragment todayRecommFragment;
     private FragmentManager fragmentManager;
+    private Bundle reenterState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         nav_header_img=(ImageView)navigationView.getHeaderView(0).findViewById(R.id.nav_header_img);
         Glide.with(this).load(R.drawable.nav_header_img).asGif().into(nav_header_img);
         setTabFragment(0);
+        setExitSharedElementCallback(new SharedElementCallback() {
+            @Override
+            public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
+                super.onMapSharedElements(names, sharedElements);
+                femaleWelfareFragment.updateSharedElements(sharedElements);
+            }
+        });
     }
 
     public void setTabFragment(int tab){
@@ -145,6 +161,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt("showNum",0);
+    }
+
+    @Override
+    public void onActivityReenter(int requestCode, Intent data) {
+        super.onActivityReenter(requestCode,data);
+        supportPostponeEnterTransition();
+        reenterState = new Bundle(data.getExtras());
+        showToast("asdfa");
+//        binding.content.scrollToPosition(reenterState.getInt("index", 0));
+//        binding.content.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+//            @Override
+//            public boolean onPreDraw() {
+//                binding.content.getViewTreeObserver().removeOnPreDrawListener(this);
+//                supportStartPostponedEnterTransition();
+//                return true;
+//            }
+//        });
     }
 
 }

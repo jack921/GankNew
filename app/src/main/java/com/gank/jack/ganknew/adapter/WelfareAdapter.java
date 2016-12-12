@@ -58,9 +58,9 @@ public class WelfareAdapter extends BaseRecyclerViewAdapter<Gank>{
         welfareView.bindView(listGank.get(position),position);
     }
 
-    class WelfareView extends RecyclerView.ViewHolder{
-        private ImageView welfareItem;
-        private TextView welfareDate;
+    public class WelfareView extends RecyclerView.ViewHolder{
+        public ImageView welfareItem;
+        public TextView welfareDate;
         public WelfareView(View itemView) {
             super(itemView);
             welfareItem=(ImageView)itemView.findViewById(R.id.welfare_item);

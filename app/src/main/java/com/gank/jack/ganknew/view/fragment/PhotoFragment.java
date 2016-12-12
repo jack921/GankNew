@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.base.BaseFragment;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -31,6 +29,7 @@ public class PhotoFragment extends BaseFragment{
 
     private PhotoViewAttacher attacher;
     private String imageUrl;
+    private String gankId;
 
     @Nullable
     @Override
@@ -41,12 +40,13 @@ public class PhotoFragment extends BaseFragment{
 
         Bundle bundle=getArguments();
         imageUrl=bundle.getString("url");
+        gankId=bundle.getString("id");
         init();
         return view;
     }
 
     public void init(){
-        ViewCompat.setTransitionName(photoImage,getString(R.string.transitionAnimator));
+        ViewCompat.setTransitionName(photoImage,String.format("%s.image",gankId));
         Glide.with(this).load(imageUrl)
              .asBitmap()
              .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -60,10 +60,13 @@ public class PhotoFragment extends BaseFragment{
         attacher=new PhotoViewAttacher(photoImage);
     }
 
+    private void startPostponedEnterTransition() {
+        getActivity().supportStartPostponedEnterTransition();
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        attacher.cleanup();
         ButterKnife.unbind(this);
     }
 
