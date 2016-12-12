@@ -3,17 +3,22 @@ package com.gank.jack.ganknew.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.SharedElementCallback;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.PhotoFragmentAdapter;
 import com.gank.jack.ganknew.base.ToolbarBaseActivity;
 import com.gank.jack.ganknew.bean.FemaleCurrent;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.utils.ImmersiveUtil;
+import com.gank.jack.ganknew.view.fragment.PhotoFragment;
 
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
+import java.util.Map;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -48,6 +53,7 @@ public class PhotoActivity extends ToolbarBaseActivity implements ViewPager.OnPa
         listGank=(List<Gank>) getIntent().getSerializableExtra("listGank");
         position=getIntent().getIntExtra("position",0);
         photoViewpager.setOnPageChangeListener(this);
+
     }
 
 
@@ -55,6 +61,17 @@ public class PhotoActivity extends ToolbarBaseActivity implements ViewPager.OnPa
         photoFragmentAdapter=new PhotoFragmentAdapter(getSupportFragmentManager(),listGank);
         photoViewpager.setAdapter(photoFragmentAdapter);
         photoViewpager.setCurrentItem(position);
+
+        setEnterSharedElementCallback(new SharedElementCallback() {
+            @Override
+            public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
+                Gank gank=listGank.get(photoViewpager.getCurrentItem());
+                sharedElements.clear();
+                sharedElements.put(gank._id,((PhotoFragment)photoFragmentAdapter.instantiateItem(
+                        photoViewpager,photoViewpager.getCurrentItem())).getSharedElement());
+
+            }
+        });
     }
 
     @Override

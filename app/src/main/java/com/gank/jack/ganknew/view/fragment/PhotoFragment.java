@@ -30,6 +30,7 @@ public class PhotoFragment extends BaseFragment{
     private PhotoViewAttacher attacher;
     private String imageUrl;
     private String gankId;
+    private boolean mInitialShown;
 
     @Nullable
     @Override
@@ -46,7 +47,7 @@ public class PhotoFragment extends BaseFragment{
     }
 
     public void init(){
-        ViewCompat.setTransitionName(photoImage,String.format("%s.image",gankId));
+//        ViewCompat.setTransitionName(photoImage,String.format("%s.image",gankId));
         Glide.with(this).load(imageUrl)
              .asBitmap()
              .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -55,13 +56,20 @@ public class PhotoFragment extends BaseFragment{
                  public void onResourceReady(Bitmap resource,GlideAnimation<? super Bitmap> glideAnimation) {
                      photoImage.setImageBitmap(resource);
                      attacher.update();
+                     maybeStartPostponedEnterTransition();
                  }
              });
         attacher=new PhotoViewAttacher(photoImage);
     }
 
-    private void startPostponedEnterTransition() {
-        getActivity().supportStartPostponedEnterTransition();
+    private void maybeStartPostponedEnterTransition() {
+//        if (mInitialShown) {
+            getActivity().supportStartPostponedEnterTransition();
+//        }
+    }
+
+    public View getSharedElement(){
+        return photoImage;
     }
 
     @Override
