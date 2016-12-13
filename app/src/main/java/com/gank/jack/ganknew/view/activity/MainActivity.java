@@ -56,13 +56,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         nav_header_img=(ImageView)navigationView.getHeaderView(0).findViewById(R.id.nav_header_img);
         Glide.with(this).load(R.drawable.nav_header_img).asGif().into(nav_header_img);
         setTabFragment(0);
+
         setExitSharedElementCallback(new SharedElementCallback() {
             @Override
             public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
                 super.onMapSharedElements(names, sharedElements);
+//                sharedElements.clear();
                 femaleWelfareFragment.updateSharedElements(sharedElements);
             }
         });
+
     }
 
     public void setTabFragment(int tab){
@@ -163,21 +166,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         outState.putInt("showNum",0);
     }
 
-    @Override
-    public void onActivityReenter(int requestCode, Intent data) {
-        super.onActivityReenter(requestCode,data);
-        supportPostponeEnterTransition();
-        reenterState = new Bundle(data.getExtras());
-        showToast("asdfa");
-//        binding.content.scrollToPosition(reenterState.getInt("index", 0));
-//        binding.content.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-//            @Override
-//            public boolean onPreDraw() {
-//                binding.content.getViewTreeObserver().removeOnPreDrawListener(this);
-//                supportStartPostponedEnterTransition();
-//                return true;
-//            }
-//        });
-    }
+//    @Override
+//    public void onActivityReenter(int requestCode, Intent data) {
+//        super.onActivityReenter(requestCode,data);
+////        if (TYPE.GIRLS.getId().equals(mCurrFragmentType)) {
+//            reenterState = new Bundle(data.getExtras());
+//            final int index = reenterState.getInt("INDEX", 0);
+//            femaleWelfareFragment.smoothScrollTo(index);
+//            supportPostponeEnterTransition();
+//            femaleWelfareFragment.onActivityReenter(index);
+////        }
+//    }
 
 }

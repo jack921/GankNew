@@ -15,10 +15,12 @@ import java.util.List;
 public class PhotoFragmentAdapter extends FragmentStatePagerAdapter {
 
     private List<Gank> listGank=null;
+    private int current;
 
-    public PhotoFragmentAdapter(FragmentManager fm,List<Gank> listGank) {
+    public PhotoFragmentAdapter(FragmentManager fm,List<Gank> listGank,int current) {
         super(fm);
         this.listGank=listGank;
+        this.current=current;
     }
 
     @Override
@@ -26,6 +28,7 @@ public class PhotoFragmentAdapter extends FragmentStatePagerAdapter {
         Bundle bundle=new Bundle();
         bundle.putString("url",listGank.get(position).url);
         bundle.putString("id",listGank.get(position)._id);
+        bundle.putBoolean("current",current==position);
         PhotoFragment photoFragment=new PhotoFragment();
         photoFragment.setArguments(bundle);
         return photoFragment;

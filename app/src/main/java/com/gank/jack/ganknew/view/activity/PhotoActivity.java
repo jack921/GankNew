@@ -58,7 +58,7 @@ public class PhotoActivity extends ToolbarBaseActivity implements ViewPager.OnPa
 
 
     public void initView(){
-        photoFragmentAdapter=new PhotoFragmentAdapter(getSupportFragmentManager(),listGank);
+        photoFragmentAdapter=new PhotoFragmentAdapter(getSupportFragmentManager(),listGank,position);
         photoViewpager.setAdapter(photoFragmentAdapter);
         photoViewpager.setCurrentItem(position);
 
@@ -67,19 +67,20 @@ public class PhotoActivity extends ToolbarBaseActivity implements ViewPager.OnPa
             public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
                 Gank gank=listGank.get(photoViewpager.getCurrentItem());
                 sharedElements.clear();
-                sharedElements.put(gank._id,((PhotoFragment)photoFragmentAdapter.instantiateItem(
+                sharedElements.put(listGank.get(photoViewpager.getCurrentItem())._id,
+                        ((PhotoFragment)photoFragmentAdapter.instantiateItem(
                         photoViewpager,photoViewpager.getCurrentItem())).getSharedElement());
 
             }
         });
+
     }
 
     @Override
     public void supportFinishAfterTransition() {
         Intent data = new Intent();
-        data.putExtra("index",photoViewpager.getCurrentItem());
-        setResult(RESULT_OK, data);
-        ImmersiveUtil.exit(this);
+        data.putExtra("INDEX",photoViewpager.getCurrentItem());
+        setResult(RESULT_OK,data);
         super.supportFinishAfterTransition();
     }
 
@@ -89,6 +90,11 @@ public class PhotoActivity extends ToolbarBaseActivity implements ViewPager.OnPa
         ButterKnife.unbind(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        supportFinishAfterTransition();
+        super.onBackPressed();
+    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}

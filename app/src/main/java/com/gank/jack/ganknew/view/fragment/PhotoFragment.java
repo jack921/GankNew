@@ -18,10 +18,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-/**
- * @author 谢汉杰
- */
-
 public class PhotoFragment extends BaseFragment{
 
     @Bind(R.id.photo_image)
@@ -30,7 +26,21 @@ public class PhotoFragment extends BaseFragment{
     private PhotoViewAttacher attacher;
     private String imageUrl;
     private String gankId;
-    private boolean mInitialShown;
+    private boolean current;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle=getArguments();
+        imageUrl=bundle.getString("url");
+        gankId=bundle.getString("id");
+        current=bundle.getBoolean("current");
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ViewCompat.setTransitionName(photoImage,gankId);
+    }
 
     @Nullable
     @Override
@@ -39,15 +49,11 @@ public class PhotoFragment extends BaseFragment{
         View view=LayoutInflater.from(getActivity()).inflate(R.layout.fragment_photo,container,false);
         ButterKnife.bind(this,view);
 
-        Bundle bundle=getArguments();
-        imageUrl=bundle.getString("url");
-        gankId=bundle.getString("id");
         init();
         return view;
     }
 
     public void init(){
-//        ViewCompat.setTransitionName(photoImage,String.format("%s.image",gankId));
         Glide.with(this).load(imageUrl)
              .asBitmap()
              .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -63,9 +69,9 @@ public class PhotoFragment extends BaseFragment{
     }
 
     private void maybeStartPostponedEnterTransition() {
-//        if (mInitialShown) {
+        if(current){
             getActivity().supportStartPostponedEnterTransition();
-//        }
+        }
     }
 
     public View getSharedElement(){

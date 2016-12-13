@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -127,8 +128,8 @@ public class FemaleWelfareFragment extends BaseFragment implements
                      Intent intent=new Intent(getActivity(), PhotoActivity.class);
                      intent.putExtra("listGank",(Serializable)listGank);
                      intent.putExtra("position",position);
-                     ActivityOptionsCompat compat=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                                (ImageView)v,String.format("%s.image",listGank.get(position)._id));
+                     ActivityOptionsCompat compat=ActivityOptionsCompat.
+                             makeSceneTransitionAnimation(getActivity(),v,listGank.get(position)._id);
                      startActivity(intent,compat.toBundle());
                  }
              });
@@ -142,8 +143,7 @@ public class FemaleWelfareFragment extends BaseFragment implements
     public void updateSharedElements(Map<String, View> sharedElements){
         WelfareAdapter.WelfareView welfareView=(WelfareAdapter.WelfareView)
                 welfareRecyclerview.findViewHolderForLayoutPosition(welfareCurrent);
-        sharedElements.put(String.format("%s.image",listGank.get(welfareCurrent)._id),
-                welfareView.welfareItem);
+        sharedElements.put(listGank.get(welfareCurrent)._id,welfareView.welfareItem);
     }
 
     @Override
@@ -151,4 +151,20 @@ public class FemaleWelfareFragment extends BaseFragment implements
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+    public void smoothScrollTo(int index) {
+        welfareRecyclerview.smoothScrollToPosition(index);
+    }
+
+//    public void onActivityReenter(final int index) {
+//        welfareRecyclerview.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+//            @Override
+//            public boolean onPreDraw() {
+//                welfareRecyclerview.getViewTreeObserver().removeOnPreDrawListener(this);
+//                getActivity().supportStartPostponedEnterTransition();
+//                return true;
+//            }
+//        });
+//    }
+
 }
