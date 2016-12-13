@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private MyCollectFragment myCollectFragment;
     private TodayRecommFragment todayRecommFragment;
     private FragmentManager fragmentManager;
+
     private Bundle reenterState;
 
     @Override
@@ -61,7 +62,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             @Override
             public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
                 super.onMapSharedElements(names, sharedElements);
-//                sharedElements.clear();
                 femaleWelfareFragment.updateSharedElements(sharedElements);
             }
         });
@@ -166,16 +166,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         outState.putInt("showNum",0);
     }
 
-//    @Override
-//    public void onActivityReenter(int requestCode, Intent data) {
-//        super.onActivityReenter(requestCode,data);
-////        if (TYPE.GIRLS.getId().equals(mCurrFragmentType)) {
-//            reenterState = new Bundle(data.getExtras());
-//            final int index = reenterState.getInt("INDEX", 0);
-//            femaleWelfareFragment.smoothScrollTo(index);
-//            supportPostponeEnterTransition();
-//            femaleWelfareFragment.onActivityReenter(index);
-////        }
-//    }
+    @Override
+    public void onActivityReenter(int requestCode, Intent data) {
+        super.onActivityReenter(requestCode,data);
+        reenterState = new Bundle(data.getExtras());
+        final int index = reenterState.getInt("INDEX", 0);
+        femaleWelfareFragment.smoothScrollTo(index);
+        supportPostponeEnterTransition();
+        femaleWelfareFragment.onActivityReenter(index);
+    }
 
 }

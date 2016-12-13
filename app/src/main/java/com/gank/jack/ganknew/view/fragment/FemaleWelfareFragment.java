@@ -143,7 +143,9 @@ public class FemaleWelfareFragment extends BaseFragment implements
     public void updateSharedElements(Map<String, View> sharedElements){
         WelfareAdapter.WelfareView welfareView=(WelfareAdapter.WelfareView)
                 welfareRecyclerview.findViewHolderForLayoutPosition(welfareCurrent);
-        sharedElements.put(listGank.get(welfareCurrent)._id,welfareView.welfareItem);
+        if(welfareView!=null){
+            sharedElements.put(listGank.get(welfareCurrent)._id,welfareView.welfareItem);
+        }
     }
 
     @Override
@@ -156,15 +158,15 @@ public class FemaleWelfareFragment extends BaseFragment implements
         welfareRecyclerview.smoothScrollToPosition(index);
     }
 
-//    public void onActivityReenter(final int index) {
-//        welfareRecyclerview.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-//            @Override
-//            public boolean onPreDraw() {
-//                welfareRecyclerview.getViewTreeObserver().removeOnPreDrawListener(this);
-//                getActivity().supportStartPostponedEnterTransition();
-//                return true;
-//            }
-//        });
-//    }
+    public void onActivityReenter(final int index) {
+        welfareRecyclerview.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                welfareRecyclerview.getViewTreeObserver().removeOnPreDrawListener(this);
+                getActivity().supportStartPostponedEnterTransition();
+                return true;
+            }
+        });
+    }
 
 }

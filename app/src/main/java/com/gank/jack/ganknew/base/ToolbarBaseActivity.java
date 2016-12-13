@@ -15,23 +15,17 @@ import butterknife.ButterKnife;
 
 public abstract class ToolbarBaseActivity extends BaseActivity{
 
-    @Bind(R.id.photo_app_bar_layout)
     public AppBarLayout appBarLayout;
-    @Bind(R.id.photo_toolbar)
     public Toolbar photoToolbar;
     protected boolean mIsHidden = false;
-
-    abstract protected int setContentViewId();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(setContentViewId());
-        ButterKnife.bind(this);
     }
 
     public void setToolbarAlpha(float alpha,int color){
-        setBaseSupportActionBar(photoToolbar);
+        setSupportActionBar(photoToolbar);
         photoToolbar.setBackgroundColor(getResources().getColor(color));
         appBarLayout.setAlpha(alpha);
     }
@@ -44,10 +38,5 @@ public abstract class ToolbarBaseActivity extends BaseActivity{
         mIsHidden = !mIsHidden;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
-    }
 
 }
