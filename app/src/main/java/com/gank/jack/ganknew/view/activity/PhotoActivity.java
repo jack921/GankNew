@@ -8,8 +8,9 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.SharedElementCallback;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.PhotoFragmentAdapter;
 import com.gank.jack.ganknew.base.ToolbarBaseActivity;
@@ -17,18 +18,21 @@ import com.gank.jack.ganknew.bean.FemaleCurrent;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.view.fragment.PhotoFragment;
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * @author 谢汉杰
  */
 
 public class PhotoActivity extends ToolbarBaseActivity
-        implements ViewPager.OnPageChangeListener {
+        implements ViewPager.OnPageChangeListener{
 
     @Bind(R.id.photo_viewpager)
     public ViewPager photoViewpager;
@@ -43,22 +47,21 @@ public class PhotoActivity extends ToolbarBaseActivity
         supportPostponeEnterTransition();
         setContentView(R.layout.activity_photo);
         ButterKnife.bind(this);
-        appBarLayout=(AppBarLayout)findViewById(R.id.photo_app_bar_layout);
         photoToolbar=(Toolbar)findViewById(R.id.photo_toolbar);
         init();
         initView();
     }
 
     public void init(){
-        setStatusBarTintColor(R.color.black);
-        setToolbarAlpha(0.4f,R.color.photo_bg);
+//        setToolbarAlpha(0.4f,R.color.photo_bg);
+        setBaseSupportActionBar(photoToolbar);
         listGank=(List<Gank>) getIntent().getSerializableExtra("listGank");
         position=getIntent().getIntExtra("position",0);
         photoViewpager.setOnPageChangeListener(this);
     }
 
     public void initView(){
-        photoFragmentAdapter=new PhotoFragmentAdapter(getSupportFragmentManager(),listGank,position);
+        photoFragmentAdapter=new PhotoFragmentAdapter(getSupportFragmentManager(),listGank,position,this);
         photoViewpager.setAdapter(photoFragmentAdapter);
         photoViewpager.setCurrentItem(position);
 
@@ -74,7 +77,6 @@ public class PhotoActivity extends ToolbarBaseActivity
                         photoViewpager,photoViewpager.getCurrentItem())).getSharedElement());
             }
         });
-
     }
 
     @Override
@@ -83,15 +85,6 @@ public class PhotoActivity extends ToolbarBaseActivity
         data.putExtra("INDEX",photoViewpager.getCurrentItem());
         setResult(RESULT_OK,data);
         super.supportFinishAfterTransition();
-    }
-
-    @OnClick(R.id.photo_viewpager)
-    public void onClick(View v){
-        switch(v.getId()){
-            case R.id.photo_viewpager:
-                hideOrShowToolbar();
-                break;
-        }
     }
 
     @Override
@@ -115,6 +108,28 @@ public class PhotoActivity extends ToolbarBaseActivity
         FemaleCurrent femaleCurrent=new FemaleCurrent();
         femaleCurrent.current=position;
         EventBus.getDefault().post(femaleCurrent);
+        if(position==1||position==0){
+            hideOrShowToolbar();
+        }
+    }
+
+    @Subscribe(threadMode=ThreadMode.MAIN)
+    public void imageTouch(PhotoViewAttacher attacher){
+        hideOrShowToolbar();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.webcontent_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

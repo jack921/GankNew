@@ -6,4 +6,22 @@
             <item name="android:statusBarColor">@android:color/transparent</item>
       </style>
 
+      <style name="Transparent" parent="BaseStyle">
+            <item name="android:windowBackground">@color/transparent</item>
+            <item name="android:windowIsTranslucent">true</item>
+            <item name="android:windowTranslucentNavigation">true</item>
+            <item name="android:windowTranslucentStatus">true</item>
+            <item name="android:statusBarColor">@android:color/transparent</item>
+      </style>
+
+      <style name="BaseStyle" parent="AppTheme.NoActionBar">
+            <item name="windowActionBar">false</item>
+            <item name="windowNoTitle">true</item>
+            <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+            <item name="android:windowContentTransitions">true</item>
+            <item name="android:statusBarColor">@color/colorPrimary</item>
+            <item name="windowActionModeOverlay">true</item>
+            <item name="android:actionModeBackground">@drawable/context_menu</item>
+      </style>
+
 </resources>

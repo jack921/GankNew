@@ -22,12 +22,19 @@
         </activity>
 
         <activity android:name=".view.activity.WebContentActivity"></activity>
+
         <activity android:name=".view.activity.TabSortActivity"></activity>
+
         <activity android:name=".view.activity.SelectDateActivity"></activity>
+
         <activity android:name=".view.activity.SearchActivity"
                   android:windowSoftInputMode="adjustPan"></activity>
+
         <activity android:name=".view.activity.PublishActivity"></activity>
-        <activity android:name=".view.activity.PhotoActivity"></activity>
+
+        <activity android:name=".view.activity.PhotoActivity"
+            android:theme="@style/Transparent"></activity>
+
     </application>
 
 </manifest>

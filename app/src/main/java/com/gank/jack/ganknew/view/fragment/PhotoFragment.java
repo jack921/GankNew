@@ -14,16 +14,22 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.base.BaseFragment;
+import com.gank.jack.ganknew.view.activity.PhotoActivity;
+
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class PhotoFragment extends BaseFragment{
+public class PhotoFragment extends BaseFragment implements PhotoViewAttacher.OnViewTapListener {
 
     @Bind(R.id.photo_image)
     public ImageView photoImage;
 
     private PhotoViewAttacher attacher;
+    private PhotoActivity photoActivity;
     private String imageUrl;
     private String gankId;
     private boolean current;
@@ -37,6 +43,10 @@ public class PhotoFragment extends BaseFragment{
         current=bundle.getBoolean("current");
     }
 
+    public void setPhotoActivity(PhotoActivity photoActivity){
+        this.photoActivity=photoActivity;
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         ViewCompat.setTransitionName(photoImage,gankId);
@@ -48,12 +58,13 @@ public class PhotoFragment extends BaseFragment{
             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=LayoutInflater.from(getActivity()).inflate(R.layout.fragment_photo,container,false);
         ButterKnife.bind(this,view);
-
         init();
         return view;
     }
 
     public void init(){
+        attacher=new PhotoViewAttacher(photoImage);
+        attacher.setOnViewTapListener(this);
         Glide.with(this).load(imageUrl)
              .asBitmap()
              .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -65,7 +76,6 @@ public class PhotoFragment extends BaseFragment{
                      maybeStartPostponedEnterTransition();
                  }
              });
-        attacher=new PhotoViewAttacher(photoImage);
     }
 
     private void maybeStartPostponedEnterTransition() {
@@ -82,6 +92,13 @@ public class PhotoFragment extends BaseFragment{
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onViewTap(View view, float v, float v1) {
+        if(photoActivity!=null){
+            photoActivity.hideOrShowToolbar();
+        }
     }
 
 
