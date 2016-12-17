@@ -147,18 +147,13 @@ public class FemaleWelfareFragment extends BaseFragment implements
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
     public void smoothScrollTo(int index) {
         welfareRecyclerview.smoothScrollToPosition(index);
     }
 
     public void onActivityReenter(final int index) {
-        welfareRecyclerview.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+        welfareRecyclerview.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
                 welfareRecyclerview.getViewTreeObserver().removeOnPreDrawListener(this);
@@ -166,6 +161,12 @@ public class FemaleWelfareFragment extends BaseFragment implements
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
 }

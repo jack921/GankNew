@@ -36,6 +36,7 @@
     <string name="commit_id">提交者ID</string>
     <string name="commit_type">干货类型</string>
     <string name="publish">发布</string>
+    <string name="imgsave">图片保存在:</string>
     <string name="transitionAnimator">transitionAnimator</string>
 
 </resources>

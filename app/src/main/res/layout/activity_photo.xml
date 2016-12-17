@@ -4,19 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@color/photo_bg">
 
-    <android.support.v4.view.ViewPager
+    <com.gank.jack.ganknew.utils.widget.PhotoViewPager
         android:id="@+id/photo_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:id="@+id/photo_app_bar_layout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-        <!--app:elevation="3dp">-->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/photo_app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@drawable/viewer_header"
+        app:elevation="3dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/photo_toolbar"
@@ -24,6 +26,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/viewer_header" />
 
-    <!--</android.support.design.widget.AppBarLayout>-->
+    </android.support.design.widget.AppBarLayout>
 
 </RelativeLayout>

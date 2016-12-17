@@ -79,9 +79,8 @@ public class WelfareAdapter extends BaseRecyclerViewAdapter<Gank>{
             ViewGroup.LayoutParams lp = welfareItem.getLayoutParams();
             lp.height = listHeight.get(position);
             welfareItem.setLayoutParams(lp);
-            ImageLoad.displayImage(
-                    gank.url+"?ImageView2/0/w/"+(ScreenUtils.getScreenWidthDp(context)/2-350),
-                    welfareItem);
+            ImageLoad.displayImage(gank.url+"?ImageView2/0/w/"+
+                    (ScreenUtils.getScreenWidthDp(context)/2-350),welfareItem);
         }
     }
 

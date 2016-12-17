@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_saveimg"
+        android:title="@string/collect"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/icon_saveimg" />
+
+    <item
+        android:id="@+id/action_shareimg"
+        android:title="@string/share"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/icon_share"/>
+
+</menu>
