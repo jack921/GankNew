@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_gank_item_bg"
+    android:foreground="?selectableItemBackground">
 
     <ImageView
         android:id="@+id/collectitem_img"
@@ -22,8 +24,7 @@
         android:textSize="18sp"
         android:maxLines="1"
         android:ellipsize="end"
-        android:layout_toRightOf="@+id/collectitem_img"
-        android:text="关于SharedPreference踩的那些坑"/>
+        android:layout_toRightOf="@+id/collectitem_img"/>
 
     <TextView
         android:id="@+id/collectitem_name"
@@ -34,7 +35,6 @@
         android:layout_marginTop="5dp"
         android:maxLines="1"
         android:ellipsize="end"
-        android:layout_below="@+id/collectitem_title"
-        android:text="谢汉杰"/>
+        android:layout_below="@+id/collectitem_title"/>
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import com.gank.jack.ganknew.R;
+import com.gank.jack.ganknew.utils.ToastUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
@@ -34,9 +35,13 @@ public abstract class ToolbarBaseActivity extends AppCompatActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                supportFinishAfterTransition();
             }
         });
+    }
+
+    public void showToast(String msg){
+        ToastUtil.showToast(this,msg);
     }
 
     //设置状态栏颜色

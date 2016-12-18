@@ -116,4 +116,14 @@ public class WebContentPresenter extends BasePresenter{
         }
     }
 
+    public void sharedGank(Gank gank){
+        String textShared = gank.desc+"(" + gank.url+" )"+context.getString(R.string.from_gank);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.from_app));
+        intent.putExtra(Intent.EXTRA_TEXT, textShared);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
 }

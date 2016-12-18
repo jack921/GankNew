@@ -37,6 +37,13 @@
     <string name="commit_type">干货类型</string>
     <string name="publish">发布</string>
     <string name="imgsave">图片保存在:</string>
+    <string name="sharedTitle">Gank妹子图片</string>
+    <string name="nopermission_tip">没有权限操作不了呜呜...</string>
+    <string name="from_app">来自GankNew的分享</string>
+    <string name="from_gank">来自干活集中营</string>
+    <string name="set_theme">主题</string>
+    <string name="about_app">关于</string>
+    <string name="sure">确定</string>
     <string name="transitionAnimator">transitionAnimator</string>
 
 </resources>

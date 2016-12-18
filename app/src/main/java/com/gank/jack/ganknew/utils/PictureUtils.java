@@ -76,6 +76,7 @@ public class PictureUtils {
                 return file;
             }
         } catch (Exception e) {
+            String text=e.getMessage();
             e.printStackTrace();
         }
         return null;
@@ -87,13 +88,14 @@ public class PictureUtils {
         return splitStrs[splitStrs.length - 1];
     }
 
-    public static void saveBitmapFromUrl(Context context, String url)
+    public static boolean saveBitmapFromUrl(Context context, String url)
             throws ExecutionException, InterruptedException {
         Bitmap bitmap = Glide.with(context)
                 .load(url).asBitmap()
                 .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .get();
         PictureUtils.saveBitmapToSDCard(bitmap, url,context);
+        return true;
     }
 
     public static String getImgPathFromUrl(String url) {

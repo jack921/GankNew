@@ -114,6 +114,7 @@ public class WebContentActivity extends BaseActivity
                 webContentPresenter.dealCollect(this,item,collectStatus,gank);
                 break;
             case R.id.action_share:
+                webContentPresenter.sharedGank(gank);
                 break;
             case R.id.action_browser:
                 webContentPresenter.openUrlOfBrower(this,gank.url);

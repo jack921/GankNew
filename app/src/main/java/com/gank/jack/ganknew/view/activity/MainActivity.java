@@ -148,6 +148,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_collect:
                 setTabFragment(3);
                 break;
+            case R.id.nav_theme:
+                startActivity(new Intent(this,ThemeActivity.class));
+                break;
+            case R.id.nav_about:
+                startActivity(new Intent(this,AboutActivity.class));
+                break;
         }
         ((DrawerLayout) findViewById(R.id.drawer_layout))
                 .closeDrawer(GravityCompat.START);
@@ -170,8 +176,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onActivityReenter(int requestCode, Intent data) {
         super.onActivityReenter(requestCode,data);
         reenterState = new Bundle(data.getExtras());
-        final int index = reenterState.getInt("INDEX", 0);
-        femaleWelfareFragment.smoothScrollTo(index);
+        int index = reenterState.getInt("INDEX", 0);
+//        femaleWelfareFragment.smoothScrollTo(index);
         supportPostponeEnterTransition();
         femaleWelfareFragment.onActivityReenter(index);
     }

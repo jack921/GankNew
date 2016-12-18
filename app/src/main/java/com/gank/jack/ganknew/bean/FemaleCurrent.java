@@ -5,5 +5,8 @@ package com.gank.jack.ganknew.bean;
  */
 
 public class FemaleCurrent {
+    public FemaleCurrent(int current) {
+        this.current = current;
+    }
     public int current;
 }

@@ -28,7 +28,8 @@ import butterknife.ButterKnife;
  * Created by Jack on 2016/11/10.
  */
 
-public class ClassifyTabFragment extends BaseFragment implements ClassifyTabInterface, RefreshInterface, SwipeRefreshLayout.OnRefreshListener, OnClickLintener {
+public class ClassifyTabFragment extends BaseFragment implements
+        ClassifyTabInterface, RefreshInterface, SwipeRefreshLayout.OnRefreshListener, OnClickLintener {
 
     @Bind(R.id.classifgtab_recyclerview)
     public RecyclerView tabRecylerView;
@@ -101,5 +102,6 @@ public class ClassifyTabFragment extends BaseFragment implements ClassifyTabInte
         intent.putExtra("gank",tabListGank.get(position));
         startNewActivityByIntent(intent);
     }
+
 
 }

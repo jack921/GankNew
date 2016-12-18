@@ -2,19 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_gank_item_bg"
+    android:foreground="?selectableItemBackground">
 
-    <TextView
-        android:id="@+id/classifytab_item_content"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_toRightOf="@+id/port_id"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp"
-        android:lineSpacingExtra="3dp"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/port_content"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_spot"/>
+
+        <TextView
+            android:id="@+id/classifytab_item_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/port_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="14sp"
+            android:lineSpacingExtra="3dp" />
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/classifytab_item_image"
