@@ -12,4 +12,22 @@
         <item>App</item>
     </string-array>
 
+    <array name="theme">
+        <item>@color/colorBluePrimary</item>
+        <item>@color/colorRedPrimary</item>
+        <item>@color/colorBrownPrimary</item>
+        <item>@color/colorGreenPrimary</item>
+        <item>@color/colorPurplePrimary</item>
+        <item>@color/colorTealPrimary</item>
+        <item>@color/colorPinkPrimary</item>
+        <item>@color/colorDeepPurplePrimary</item>
+        <item>@color/colorOrangePrimary</item>
+        <item>@color/colorIndigoPrimary</item>
+        <item>@color/colorCyanPrimary</item>
+        <item>@color/colorLightGreenPrimary</item>
+        <item>@color/colorLimePrimary</item>
+        <item>@color/colorDeepOrangePrimary</item>
+        <item>@color/colorBlueGreyPrimary</item>
+    </array>
+
 </resources>

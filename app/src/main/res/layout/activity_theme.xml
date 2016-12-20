@@ -16,10 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/theme_recyclerview"
@@ -28,18 +27,61 @@
         android:layout_alignParentBottom="true">
     </android.support.v7.widget.RecyclerView>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/theme_recyclerview"
         android:layout_below="@+id/about_appbar">
 
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/theme_statusbar"
+                android:layout_width="210dp"
+                android:layout_height="15dp"
+                android:background="@color/colorAccent">
+
+                <TextView
+                    android:id="@+id/theme_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:textSize="10sp"
+                    android:text="12:20"/>
+
+                <ImageView
+                    android:id="@+id/theme_ele"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_phone_electricity"
+                    android:layout_toLeftOf="@+id/theme_time"/>
+
+                <ImageView
+                    android:id="@+id/theme_message"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_phone_msg"
+                    android:layout_toLeftOf="@+id/theme_ele"/>
+
+                <ImageView
+                    android:id="@+id/theme_net"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_phone_net"
+                    android:layout_toLeftOf="@+id/theme_message"/>
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/theme_header"
@@ -59,16 +101,53 @@
 
             </RelativeLayout>
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="210dp"
-                android:layout_height="360dp"
-                android:layout_below="@+id/theme_header"
-                android:layout_centerHorizontal="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/test_activity"/>
+                android:layout_height="330dp">
 
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="210dp"
+                    android:layout_height="330dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_theme_bg"/>
 
+                <RelativeLayout
+                    android:id="@+id/fab_theme_bg"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@drawable/theme_item_bg">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/icon_yuandian"/>
+                        <ImageView
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/icon_yuandian"/>
+                        <ImageView
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/icon_yuandian"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
     </RelativeLayout>
+
 
 </RelativeLayout>
