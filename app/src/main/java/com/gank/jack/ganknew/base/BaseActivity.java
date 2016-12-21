@@ -25,6 +25,8 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class BaseActivity extends AppCompatActivity{
 
+    public Theme theme;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class BaseActivity extends AppCompatActivity{
     }
 
     public void setTheme(){
-        Theme theme= PreUtils.getCurrentTheme(this);
+        theme= PreUtils.getCurrentTheme(this);
         PreUtils.changeTheme(this,StyleColorUtils.getStyleColorId(theme.name()),theme.name());
     }
 

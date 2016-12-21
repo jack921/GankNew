@@ -19,6 +19,8 @@ import com.gank.jack.ganknew.theme.Theme;
 import com.gank.jack.ganknew.utils.PreUtils;
 import com.gank.jack.ganknew.utils.ToastUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
@@ -44,6 +46,7 @@ public class ThemeActivity extends BaseActivity implements OnClickLintener {
 
     public ThemeAdapter themeAdapter;
     private ThemePersenter themePersenter;
+    private int currentPosition;
     private List<ThemeModel> listTheme=new ArrayList<>();
 
     private int[] themeColor=new int[]{R.color.colorBluePrimary,R.color.colorRedPrimary
@@ -74,7 +77,7 @@ public class ThemeActivity extends BaseActivity implements OnClickLintener {
     }
 
     public void initView(){
-        themePersenter.getListColor(themeColor,listTheme);
+        themePersenter.getListColor(themeColor,listTheme,theme);
         themeAdapter.notifyDataSetChanged();
     }
 
@@ -88,12 +91,12 @@ public class ThemeActivity extends BaseActivity implements OnClickLintener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_sure:
-                ToastUtil.showToast(this,"sdfasd");
-                PreUtils.changeTheme(ThemeActivity.this,R.style.BlueTheme, Theme.Blue.toString());
+                PreUtils.changeTheme(ThemeActivity.this,themePersenter.getThemeStyle(
+                        listTheme.get(currentPosition).color),
+                        themePersenter.getTheme(listTheme.get(currentPosition).color));
                 PreUtils.changeColorImpl(ThemeActivity.this,ThemeActivity.this.getTheme());
+                EventBus.getDefault().post(listTheme.get(currentPosition));
                 finish();
-//                collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
-//                collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -101,9 +104,10 @@ public class ThemeActivity extends BaseActivity implements OnClickLintener {
 
     @Override
     public void onClick(View v, int position) {
-        themeHeader.setBackgroundColor(listTheme.get(position).color);
-        themeStatusbar.setBackgroundColor(listTheme.get(position).color);
-        fabThemeBg.setBackgroundColor(listTheme.get(position).color);
+        currentPosition=position;
+        themeHeader.setBackgroundColor(getResources().getColor(listTheme.get(position).color));
+        themeStatusbar.setBackgroundColor(getResources().getColor(listTheme.get(position).color));
+        fabThemeBg.setBackgroundColor(getResources().getColor(listTheme.get(position).color));
         themePersenter.selectListColor(position,listTheme);
         themeAdapter.notifyDataSetChanged();
     }

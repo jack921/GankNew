@@ -1,6 +1,7 @@
 package com.gank.jack.ganknew.view.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -20,6 +21,7 @@ import com.gank.jack.ganknew.base.BaseFragment;
 import com.gank.jack.ganknew.bean.DateResult;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.bean.SelectDate;
+import com.gank.jack.ganknew.bean.ThemeModel;
 import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.interfaces.TodayRecommInterface;
 import com.gank.jack.ganknew.presenter.TodayRecommPresenter;
@@ -125,8 +127,7 @@ public class TodayRecommFragment extends BaseFragment implements
     @Override
     public void getSelectDate(SelectDate selectDate) {
         dateResult=todayRecommPresenter.formatStringDate(selectDate.results.get(0));
-        todayRecommPresenter.getTodayRecommData(this,
-                dateResult.year,dateResult.month,dateResult.day);
+        todayRecommPresenter.getTodayRecommData(this,dateResult.year,dateResult.month,dateResult.day);
     }
 
     //网络出错等情况时
@@ -143,10 +144,13 @@ public class TodayRecommFragment extends BaseFragment implements
         startNewActivityByIntent(intent);
     }
 
-//  PreUtils.changeTheme(getActivity(),R.style.BlueTheme, Theme.Blue.toString());
-//  PreUtils.changeColorImpl(getActivity(),getActivity().getTheme());
-//  collapsingToolbarLayout.setStatusBarScrimColor(Color.BLUE);
-//  collapsingToolbarLayout.setContentScrimColor(Color.BLUE);
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeCollapsingToolbarLayoutTheme(ThemeModel themeModel){
+        collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(themeModel.color));
+        collapsingToolbarLayout.setContentScrimColor(getResources().getColor(themeModel.color));
+        boomMenuButton.setBoomButtonBackgroundColor(
+                getResources().getColor(themeModel.color),getResources().getColor(themeModel.color));
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void UpdateTodayData(DateResult dateResult){
