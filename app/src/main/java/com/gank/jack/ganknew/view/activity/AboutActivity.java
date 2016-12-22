@@ -1,5 +1,6 @@
 package com.gank.jack.ganknew.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.gank.jack.ganknew.R;
+import com.gank.jack.ganknew.api.Config;
 import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.utils.ImageLoad;
 import com.gank.jack.ganknew.utils.PreUtils;
@@ -31,6 +33,8 @@ public class AboutActivity extends BaseActivity{
     public CollapsingToolbarLayout aboutCollapsingToolbar;
     @Bind(R.id.developeruser_img)
     public ImageView developer_img;
+    @Bind(R.id.about_bar_image)
+    public ImageView aboutBarImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class AboutActivity extends BaseActivity{
 
     public void init(){
         aboutCollapsingToolbar.setTitle("");
+        ImageLoad.displayImage(Config.GankImg,aboutBarImage);
         ImageLoad.loadCirclrImage(R.drawable.developers_img,developer_img);
     }
 
@@ -57,10 +62,19 @@ public class AboutActivity extends BaseActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.about_shared:
-                showToast("shared");
+                shardApp();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void shardApp(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT,getString(R.string.app_down_tip));
+        intent.putExtra(Intent.EXTRA_TEXT,getString(R.string.app_down_tip)+":"+getString(R.string.app_url));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }

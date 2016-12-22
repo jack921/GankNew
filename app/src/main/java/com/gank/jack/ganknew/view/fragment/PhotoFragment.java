@@ -54,8 +54,7 @@ public class PhotoFragment extends BaseFragment implements PhotoViewAttacher.OnV
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater,
-            @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=LayoutInflater.from(getActivity()).inflate(R.layout.fragment_photo,container,false);
         ButterKnife.bind(this,view);
         init();

@@ -2,6 +2,7 @@ package com.gank.jack.ganknew.presenter;
 
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.adapter.TodayRecommAdapter;
+import com.gank.jack.ganknew.api.Config;
 import com.gank.jack.ganknew.bean.DateResult;
 import com.gank.jack.ganknew.bean.Gank;
 import com.gank.jack.ganknew.bean.SelectDate;
@@ -58,6 +59,7 @@ public class TodayRecommPresenter extends BasePresenter{
         if(listGank!=null) listGank.clear();
         listGank.addAll(listGanks);
         if(listGank.get(listGank.size()-1).type.equals("福利")){
+            Config.GankImg=listGank.get(listGank.size()-1).url;
             ImageLoad.displayImage(listGank.get(listGank.size()-1).url,todayGankImage);
         }
         collapsingToolbarLayout.setTitle(dateResult.year+"年"+dateResult.month+"月"+dateResult.day+"日");

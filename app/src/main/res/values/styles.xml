@@ -21,6 +21,12 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="TitleTextAppearance"
+        parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/textColorTitle</item>
+    </style>
+
     <!--blueTheme-->
     <style name="BlueTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorBluePrimary</item>

@@ -2,6 +2,7 @@
 <resources>
 
     <color name="photo_bg">#000000</color>
+    <color name="textColorTitle">#000000</color>
 
     <array name="colors">
         <item>@color/colorBluePrimary</item>

@@ -102,8 +102,8 @@ public class WebContentActivity extends BaseActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.webcontent_menu,menu);
-        webContentPresenter.intiCollectOptionsMenu(this,getIntent().getBooleanExtra("collectTag",false),
-                menu,gank._id);
+        webContentPresenter.intiCollectOptionsMenu(this,
+                getIntent().getBooleanExtra("collectTag",false),menu,gank._id);
         return true;
     }
 

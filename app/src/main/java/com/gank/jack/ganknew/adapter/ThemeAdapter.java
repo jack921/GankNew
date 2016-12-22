@@ -1,19 +1,15 @@
 package com.gank.jack.ganknew.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.bean.ThemeModel;
 import com.gank.jack.ganknew.interfaces.OnClickLintener;
-import com.gank.jack.ganknew.utils.LogUtil;
-
 import java.util.List;
 
 /**

@@ -51,17 +51,26 @@
     <string name="transitionAnimator">transitionAnimator</string>
 
     <string name="use_library_tip">
-        " "org.greenrobot:eventbus:3.0.0\n
-        com.squareup.retrofit2:retrofit\n
-        com.jakewharton:butterknife:7.0.1\n
-        com.github.bumptech.glide:glide:3.7.0\n
-        com.nightonke:boommenu:1.0.9\n
-        com.github.chrisbanes:PhotoView:1.2.7\n
-        io.reactivex:rxandroid:1.2.1
+        RxJava: https://github.com/ReactiveX/RxJava\n\n
+        RxAndroid: https://github.com/ReactiveX/RxAndroid\n\n
+        Retrofit: https://github.com/square/retrofit\n\n
+        Glide: https://github.com/bumptech/glide\n\n
+        EventBus: https://github.com/greenrobot/EventBus\n\n
+        ButterKnife:https://github.com/JakeWharton/butterknife\n\n
+        BoomMenu: https://github.com/Nightonke/BoomMenu
     </string>
 
     <string name="thanker">干货集中营:http://gank.io</string>
     <string name="developers_name">Jack921</string>
     <string name="my_github">github:https://github.com/jack921</string>
+    <string name="project_introduction">GankNew 是干货集中营众多客户端的一员，可以查看每一天提供的Android,ios,web,
+        休息视频等相关的技术干货，还有一张妹子图在等着你哦，除此之外你还可以查看以往的技术干货，发布你自己的技术干货
+        ，或者根据关键字搜索先关的内容，同时按照不同的分类查看自己感兴趣的分类的干货如android,ios等，看完还可以收藏，
+        分享自己喜欢的干货，对于男同胞来说对对重要的当然是查看瀑布流的妹子列表，想想都高兴，最后支持换肤，总有一种颜色适合你的心情\n\n
+        本项目完全开源，用的是现在很多的MVP模式开发，并学习和整个Rxjava,Retrofit,EventBus,ButterKnife的各个优秀开源框架的优点而产生的东西，
+        自己学一个完成客户端从开始的设计，调研，都后来的编码，还有一些看似简单其实还是有点麻烦的小细节的实现，整个流程一下来是可以学到很多
+        东西的，和激发起自己的很多思考，这也是我觉得做这个最重要的地方。不过由于水平有限，有些不足之处敬请见谅和指出。</string>
+    <string name="app_url">http://fir.im/j8c3</string>
+    <string name="app_down_tip">GankNew APP欢迎下载</string>
 
 </resources>
