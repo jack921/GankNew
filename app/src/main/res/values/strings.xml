@@ -44,6 +44,24 @@
     <string name="set_theme">主题</string>
     <string name="about_app">关于</string>
     <string name="sure">确定</string>
+    <string name="project_introduce">项目介绍</string>
+    <string name="developers">开发者</string>
+    <string name="thank">感谢</string>
+    <string name="use_library">用到的库</string>
     <string name="transitionAnimator">transitionAnimator</string>
+
+    <string name="use_library_tip">
+        " "org.greenrobot:eventbus:3.0.0\n
+        com.squareup.retrofit2:retrofit\n
+        com.jakewharton:butterknife:7.0.1\n
+        com.github.bumptech.glide:glide:3.7.0\n
+        com.nightonke:boommenu:1.0.9\n
+        com.github.chrisbanes:PhotoView:1.2.7\n
+        io.reactivex:rxandroid:1.2.1
+    </string>
+
+    <string name="thanker">干货集中营:http://gank.io</string>
+    <string name="developers_name">Jack921</string>
+    <string name="my_github">github:https://github.com/jack921</string>
 
 </resources>

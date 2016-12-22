@@ -9,6 +9,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.gank.jack.ganknew.R;
 import com.gank.jack.ganknew.base.MyApplication;
+import com.gank.jack.ganknew.utils.widget.GlideRoundTransform;
 
 /**
  * Created by Jack on 2016/11/6.
@@ -25,6 +26,12 @@ public class ImageLoad {
                 .crossFade()
                 .centerCrop()
                 .into(imageView);
+    }
+
+    public static void loadCirclrImage(int url, ImageView imageView) {
+        Glide.with(MyApplication.getContext()).load(url).placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher).transform(new GlideRoundTransform(
+                MyApplication.getContext())).into(imageView);
     }
 
 }

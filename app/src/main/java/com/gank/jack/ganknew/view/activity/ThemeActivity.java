@@ -1,5 +1,6 @@
 package com.gank.jack.ganknew.view.activity;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,12 +16,8 @@ import com.gank.jack.ganknew.base.BaseActivity;
 import com.gank.jack.ganknew.bean.ThemeModel;
 import com.gank.jack.ganknew.interfaces.OnClickLintener;
 import com.gank.jack.ganknew.presenter.ThemePersenter;
-import com.gank.jack.ganknew.theme.Theme;
 import com.gank.jack.ganknew.utils.PreUtils;
-import com.gank.jack.ganknew.utils.ToastUtil;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
@@ -107,7 +104,8 @@ public class ThemeActivity extends BaseActivity implements OnClickLintener {
         currentPosition=position;
         themeHeader.setBackgroundColor(getResources().getColor(listTheme.get(position).color));
         themeStatusbar.setBackgroundColor(getResources().getColor(listTheme.get(position).color));
-        fabThemeBg.setBackgroundColor(getResources().getColor(listTheme.get(position).color));
+        ((GradientDrawable)fabThemeBg.getBackground()).setColor(
+                getResources().getColor(listTheme.get(position).color));
         themePersenter.selectListColor(position,listTheme);
         themeAdapter.notifyDataSetChanged();
     }
