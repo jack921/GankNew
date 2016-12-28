@@ -7,8 +7,8 @@ android {
         applicationId "com.gank.jack.ganknew"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.01"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -21,7 +21,12 @@ android {
 
 allprojects {
     repositories {
-        maven { url "https://jitpack.io" }
+        maven {
+            url "https://jitpack.io"
+        }
+        maven {
+            url "http://maven.bughd.com/public"
+        }
     }
 }
 
@@ -44,5 +49,6 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.nightonke:boommenu:1.0.9'
     compile 'com.github.chrisbanes:PhotoView:1.2.7'
+    compile 'im.fir:fir-sdk:latest.integration@aar'
     testCompile 'junit:junit:4.12'
 }

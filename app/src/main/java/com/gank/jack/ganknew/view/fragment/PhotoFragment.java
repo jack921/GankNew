@@ -28,7 +28,7 @@ public class PhotoFragment extends BaseFragment implements PhotoViewAttacher.OnV
     @Bind(R.id.photo_image)
     public ImageView photoImage;
 
-    private PhotoViewAttacher attacher;
+    public PhotoViewAttacher attacher;
     private PhotoActivity photoActivity;
     private String imageUrl;
     private String gankId;

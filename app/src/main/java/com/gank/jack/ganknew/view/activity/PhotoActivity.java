@@ -105,6 +105,8 @@ public class PhotoActivity extends ToolbarBaseActivity implements ViewPager.OnPa
         Intent data = new Intent();
         data.putExtra("INDEX",photoViewpager.getCurrentItem());
         setResult(RESULT_OK,data);
+        ((PhotoFragment)photoFragmentAdapter.instantiateItem(
+                photoViewpager,photoViewpager.getCurrentItem())).attacher.cleanup();
         super.supportFinishAfterTransition();
     }
 

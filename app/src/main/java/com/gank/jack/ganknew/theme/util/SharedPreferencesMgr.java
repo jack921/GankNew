@@ -15,7 +15,7 @@ public class SharedPreferencesMgr {
 	{
 		this.context=context;
 		sPrefs= context.getSharedPreferences(
-				 fileName, Context.MODE_WORLD_READABLE );
+				 fileName, Context.MODE_PRIVATE);
 	}
 
 	public static void init(Context context,String fileName)

@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".base.MyApplication"
@@ -14,6 +16,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/RedTheme" >
+
+        <meta-data android:value="6024ad07141912c13520acf9a8c35af7" android:name="BUG_HD_SDK_GENERAL_KEY" />
+
         <activity
             android:name=".view.activity.MainActivity"
             android:label="@string/app_name">
